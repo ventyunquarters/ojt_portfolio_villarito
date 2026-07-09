@@ -73,7 +73,6 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: -9999;
-  /* Absolute lowest stacking context to sit behind all elements */
   overflow: hidden;
 }
 
@@ -84,18 +83,15 @@ body {
   width: 35%;
   max-width: 500px;
   opacity: 0.12;
-  /* Increased opacity slightly for clearer visibility */
 }
 
 .pattern-star {
   position: absolute;
   bottom: 10%;
   right: 2%;
-  /* Brought slightly inward so it doesn't get cut off on the right */
   width: 35%;
   max-width: 500px;
   opacity: 0.12;
-  /* Increased opacity slightly for clearer visibility */
 }
 
 /* Header & Navigation */
@@ -177,9 +173,7 @@ header {
 
 .nav-btn-img {
   height: 75px;
-  /* Enlarge the button asset significantly */
   margin: -18px -12px;
-  /* Pull margins inward to offset the transparent padding of the PNG */
   width: auto;
   display: block;
   transition: var(--transition-smooth);
@@ -187,7 +181,6 @@ header {
 
 .nav-btn-text {
   display: none;
-  /* Hide text links on desktop */
 }
 
 .nav-item:hover {
@@ -384,11 +377,8 @@ section {
 .id-img {
   position: absolute;
   top: -580px;
-  /* Shifted significantly higher to align lanyard top with navbar bottom */
   left: -20px;
-  /* Position card and lanyard relative to wrapper */
   width: 630px;
-  /* Enlarged significantly as requested */
   max-width: none;
   height: auto;
   object-fit: contain;
@@ -418,7 +408,6 @@ section {
   height: 360px;
   background-color: var(--color-bg-white);
   border-radius: 8px 16px 16px 8px;
-  /* mimicking book fold on right */
   box-shadow: var(--shadow-pdf);
   position: relative;
   cursor: pointer;
@@ -428,11 +417,9 @@ section {
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-left: 5px solid var(--color-primary);
-  /* Spine look */
 }
 
 .pdf-placeholder-card::before {
-  /* Book page effect on right side */
   content: '';
   position: absolute;
   right: 0;
@@ -1081,7 +1068,6 @@ footer {
 
   .id-lanyard-wrapper {
     display: none;
-    /* Hide desktop wrapper */
   }
 
   .req-grid {
@@ -1160,7 +1146,7 @@ footer {
     transform: translateY(-7.5px) rotate(-45deg);
   }
 
-  /* Elegant Right-Aligned Compact Popover Menu */
+  /* Right-Aligned Pop-over Menu */
   .nav-links {
     display: none;
     position: absolute;
@@ -1203,17 +1189,14 @@ footer {
   .nav-item:hover,
   .nav-item.active {
     background-color: rgba(139, 0, 0, 0.05);
-    /* Subtle hover overlay */
   }
 
   .nav-btn-img {
     display: none !important;
-    /* Hide dynamic image asset buttons inside hamburger dropdown */
   }
 
   .nav-btn-text {
     display: inline-block !important;
-    /* Show dynamic text links inside hamburger dropdown */
     color: var(--color-text-dark);
     font-weight: 700;
     font-size: 0.95rem;
@@ -1332,7 +1315,6 @@ footer {
   .title-section .id-lanyard-wrapper.mobile-only {
     width: 35% !important;
     max-width: 110px !important;
-    /* Scale lanyard down for skinny mobile viewports like iPhone XR */
   }
 
   .title-section .id-lanyard-wrapper.mobile-only .id-img {
@@ -1423,11 +1405,8 @@ footer {
 .box-back-wall {
   position: absolute;
   bottom: 31.4px;
-  /* Shifted up by skew height (80px * tan(15deg)) to align with back corner */
   left: 45px;
-  /* Trimmed to start behind the folder's left edge */
   width: 300px;
-  /* Adjusted to end at the back-right corner of 345px */
   height: 160px;
   background: linear-gradient(180deg, #b07e50, #98653a);
   border-radius: 4px;
@@ -1437,7 +1416,6 @@ footer {
 
 .box-back-side {
   display: none;
-  /* Merged into box-back-wall for clean horizontal back edge */
 }
 
 .box-body-side {
@@ -1450,7 +1428,6 @@ footer {
   transform: skewY(-15deg);
   transform-origin: left bottom;
   z-index: 4;
-  /* front of folder */
   border-radius: 0 0 4px 0;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
 }
@@ -1472,7 +1449,6 @@ footer {
   border-left: 1px solid #9e6d40;
   border-bottom: 1px solid #9e6d40;
   z-index: 4;
-  /* front of folder */
 }
 
 .box-body-front .body-handle {
@@ -1518,27 +1494,24 @@ footer {
   margin-top: 2px;
 }
 
-/* Manila File Folder - Sized prominently to protrude above the open box */
+/* Manila File Folder */
 .preview-folder-wrapper {
   position: absolute;
   bottom: 25px;
   left: 45px;
-  /* Scooched to the right to prevent overflowing the left edge of the box */
   width: 260px;
   height: 270px;
   z-index: 3;
   transform: translateY(210px);
-  /* Hidden deep inside the box body when closed */
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Slide out animation when visible - protrudes nicely to the top */
 .report-preview-overlay.visible .preview-folder-wrapper {
   transform: translateY(-120px);
-  /* Protrudes high above the box rim */
 }
 
-/* Hover effect on folder - pop up more and light shadow */
+/* Hover effect on folder */
 .preview-folder-wrapper:hover {
   transform: translateY(-135px) scale(1.02);
 }
