@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OJT Portfolio | Weekly Reports</title>
+  <meta name="description" content="Weekly status reports documenting OJT training activities and deliverables.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Halftone Decorative Backgrounds -->
+  <div class="bg-patterns">
+    <img src="assets/glob_ht_bg.png" alt="Decorative halftone globe" class="pattern-glob">
+    <img src="assets/star_ht_bg.png" alt="Decorative halftone star" class="pattern-star">
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header>
+    <div class="navbar-container">
+      <a href="index.html" class="cmpe-badge" id="cmpe-badge">CMPE 205</a>
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="index.html" class="nav-item" id="nav-home">
+          <img src="assets/home_button.png" alt="Home" class="nav-btn-img">
+        </a>
+        <a href="requirements.html" class="nav-item" id="nav-requirements">
+          <img src="assets/requirements_button.png" alt="Requirements" class="nav-btn-img">
+        </a>
+        <a href="weekly-report.html" class="nav-item active" id="nav-weekly">
+          <img src="assets/weekly_report_button.png" alt="Weekly Report" class="nav-btn-img">
+        </a>
+        <a href="evaluation.html" class="nav-item" id="nav-evaluation">
+          <img src="assets/evaluation_button.png" alt="Evaluation" class="nav-btn-img">
+        </a>
+        <a href="certificate.html" class="nav-item" id="nav-certificate">
+          <img src="assets/certificate_button.png" alt="Certificate" class="nav-btn-img">
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <div class="title-section">
+      <img src="assets/logo.png" alt="On-The-Job Training Tracker" class="logo-img">
+    </div>
+
+    <!-- Weekly Report Section -->
+    <section class="reveal">
+      <h2 class="section-title">Weekly Progress Reports</h2>
+      <p style="color: var(--color-text-muted); margin-bottom: 2rem;">
+        View and download the weekly progress reports outlining tasks accomplished, hours rendered, and skills
+        developed.
+      </p>
+
+      <div class="report-grid">
+
+        <!-- Week 1 -->
+        <div class="report-card reveal reveal-delay-1" onclick="openWeeklyReportPreview(1, 'July 8 - July 14, 2026')">
+          <div class="report-icon-container">
+            <div class="css-cardboard-box">
+              <div class="box-lid">
+                <div class="lid-top"></div>
+                <div class="lid-front"></div>
+                <div class="lid-side"></div>
+              </div>
+              <div class="box-body">
+                <div class="body-front">
+                  <div class="body-handle"></div>
+                </div>
+                <div class="body-side"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="report-week">WEEK 1</h3>
+          <p class="report-date">(July 8 - July 14)</p>
+          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="report-card reveal reveal-delay-2" onclick="openWeeklyReportPreview(2, 'July 15 - July 21, 2026')">
+          <div class="report-icon-container">
+            <div class="css-cardboard-box">
+              <div class="box-lid">
+                <div class="lid-top"></div>
+                <div class="lid-front"></div>
+                <div class="lid-side"></div>
+              </div>
+              <div class="box-body">
+                <div class="body-front">
+                  <div class="body-handle"></div>
+                </div>
+                <div class="body-side"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="report-week">WEEK 2</h3>
+          <p class="report-date">(July 15 - July 21)</p>
+          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="report-card reveal reveal-delay-3" onclick="openWeeklyReportPreview(3, 'July 22 - July 28, 2026')">
+          <div class="report-icon-container">
+            <div class="css-cardboard-box">
+              <div class="box-lid">
+                <div class="lid-top"></div>
+                <div class="lid-front"></div>
+                <div class="lid-side"></div>
+              </div>
+              <div class="box-body">
+                <div class="body-front">
+                  <div class="body-handle"></div>
+                </div>
+                <div class="body-side"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="report-week">WEEK 3</h3>
+          <p class="report-date">(July 22 - July 28)</p>
+          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="report-card reveal reveal-delay-1" onclick="openWeeklyReportPreview(4, 'July 29 - Aug 04, 2026')">
+          <div class="report-icon-container">
+            <div class="css-cardboard-box">
+              <div class="box-lid">
+                <div class="lid-top"></div>
+                <div class="lid-front"></div>
+                <div class="lid-side"></div>
+              </div>
+              <div class="box-body">
+                <div class="body-front">
+                  <div class="body-handle"></div>
+                </div>
+                <div class="body-side"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="report-week">WEEK 4</h3>
+          <p class="report-date">(July 29 - August 4)</p>
+          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+        </div>
+
+        <!-- Week 5 -->
+        <div class="report-card reveal reveal-delay-2" onclick="openWeeklyReportPreview(5, 'Aug 05 - Aug 11, 2026')">
+          <div class="report-icon-container">
+            <div class="css-cardboard-box">
+              <div class="box-lid">
+                <div class="lid-top"></div>
+                <div class="lid-front"></div>
+                <div class="lid-side"></div>
+              </div>
+              <div class="box-body">
+                <div class="body-front">
+                  <div class="body-handle"></div>
+                </div>
+                <div class="body-side"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="report-week">WEEK 5</h3>
+          <p class="report-date">(August 5 - August 11)</p>
+          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+        </div>
+
+        <!-- Week 6 -->
+        <div class="report-card reveal reveal-delay-3" onclick="openWeeklyReportPreview(6, 'Aug 12 - Aug 18, 2026')">
+          <div class="report-icon-container">
+            <div class="css-cardboard-box">
+              <div class="box-lid">
+                <div class="lid-top"></div>
+                <div class="lid-front"></div>
+                <div class="lid-side"></div>
+              </div>
+              <div class="box-body">
+                <div class="body-front">
+                  <div class="body-handle"></div>
+                </div>
+                <div class="body-side"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="report-week">WEEK 6</h3>
+          <p class="report-date">(August 12 - August 18)</p>
+          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+        </div>
+
+
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Report Preview Overlay -->
+  <div class="report-preview-overlay" id="report-preview-overlay">
+    <div class="preview-widget">
+      <!-- Close Button -->
+      <button class="preview-close-btn" id="preview-close-btn" aria-label="Close Preview">&times;</button>
+
+      <!-- Box Back Wall & Box Back Side (for visual layering) -->
+      <div class="box-back-wall"></div>
+      <div class="box-back-side"></div>
+
+      <!-- Preview Content Folder (Click triggers download) -->
+      <div class="preview-folder-wrapper" id="preview-folder-wrapper" tabindex="0"
+        aria-label="Click to download report PDF">
+        <!-- Open File Folder Shape -->
+        <div class="file-folder">
+          <!-- Folder Back Tab -->
+          <div class="folder-back"></div>
+
+          <!-- Document Sheet -->
+          <div class="document-sheet" id="preview-document-sheet">
+            <div class="mini-doc-container">
+              <div class="mini-doc-header">
+                <span class="mini-pup-logo">PUP</span>
+                <span class="mini-doc-dept">COMPUTER ENGINEERING DEPT</span>
+              </div>
+              <div class="mini-doc-body">
+                <h4 class="mini-doc-report-title">WEEKLY REPORT ON ACTIVITIES</h4>
+                <div class="mini-doc-meta-field"><strong>Student:</strong> Aira E. Villarito</div>
+                <div class="mini-doc-meta-field"><strong>Week Range:</strong> <span id="mini-date-range">Jun 01 - Jun
+                    05, 2026</span></div>
+                <div class="mini-doc-week-badge" id="mini-week-badge">WEEK 01</div>
+
+                <!-- Table Grid -->
+                <div class="mini-doc-table">
+                  <div class="mini-table-row mini-table-header">
+                    <div class="mini-table-cell text-bold">DAY</div>
+                    <div class="mini-table-cell text-bold">ACTIVITIES</div>
+                  </div>
+                  <div class="mini-table-row mini-hl-row">
+                    <div class="mini-table-cell date-text" id="mini-cell-day-1">Jul 12 (Sat)</div>
+                    <div class="mini-table-cell" id="mini-cell-act-1">Orientation & Project Pitch</div>
+                  </div>
+                  <div class="mini-table-row">
+                    <div class="mini-table-cell date-text" id="mini-cell-day-2">Jul 13 (Sun)</div>
+                    <div class="mini-table-cell" id="mini-cell-act-2">Database Setup & Init</div>
+                  </div>
+                  <div class="mini-table-row mini-hl-row">
+                    <div class="mini-table-cell date-text" id="mini-cell-day-3">Jul 14 (Mon)</div>
+                    <div class="mini-table-cell" id="mini-cell-act-3">Code Review & Commit</div>
+                  </div>
+                </div>
+
+                <div class="mini-doc-signatures">
+                  <div class="mini-sig-line">Prepared By: Intern</div>
+                  <div class="mini-sig-line">Verified By: Supervisor</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Folder Front Flap -->
+          <div class="folder-front"></div>
+
+          <!-- Hover Overlay Guide -->
+          <div class="folder-hover-overlay">
+            <svg viewBox="0 0 24 24" class="download-icon">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>DOWNLOAD REPORT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Cardboard Box -->
+      <div class="box-body-front">
+        <div class="box-label">
+          <span class="box-label-title">OJT PROGRESS</span>
+          <span class="box-label-sub">CMPE 205</span>
+        </div>
+        <div class="body-handle"></div>
+      </div>
+      <div class="box-body-side"></div>
+
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-text">
+        <p class="footer-copyright">Copyright © 2026 Aira E. Villarito | All Rights Reserved.</p>
+        <p class="footer-subtext">This portfolio was created in fulfillment of the academic requirements of CMPE 205
+          On-The-Job Training I.</p>
+      </div>
+      <div class="footer-socials">
+        <!-- Gmail -->
+        <a href="mailto:aira.villarito@gmail.com" class="social-link" aria-label="Gmail">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/airavillarito21/" target="_blank" rel="noopener noreferrer"
+          class="social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+          </svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/aira-villarito" target="_blank" rel="noopener noreferrer" class="social-link"
+          aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+          </svg>
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/ventyunquarters" target="_blank" rel="noopener noreferrer" class="social-link"
+          aria-label="GitHub">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

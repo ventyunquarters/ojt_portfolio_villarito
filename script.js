@@ -1,0 +1,578 @@
+/**
+ * OJT Portfolio - Interactive Script
+ * Handles Scroll Animations and PDF Download Mockup
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollReveal();
+  initPDFDownload();
+  initEvaluationDownloads();
+  initCertificateDownload();
+  initRequirementDownloads();
+  initWeeklyReportPreview();
+});
+
+/**
+ * Initializes IntersectionObserver to reveal elements when they enter the viewport
+ */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          // Once revealed, we don't need to observe it anymore
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: '0px 0px -50px 0px' // Slightly offset bottom trigger
+    });
+    
+    revealElements.forEach(element => {
+      revealObserver.observe(element);
+    });
+  } else {
+    // Fallback for browsers that do not support IntersectionObserver
+    revealElements.forEach(element => {
+      element.classList.add('revealed');
+    });
+  }
+}
+
+/**
+ * Sets up PDF download interaction for the Company Profile placeholder card
+ */
+function initPDFDownload() {
+  const pdfCard = document.getElementById('company-profile-pdf');
+  if (!pdfCard) return;
+
+  pdfCard.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Create a temporary status notification
+    showNotification('Preparing PDF Download...', 'info');
+
+    // Simulate network delay for premium feel
+    setTimeout(() => {
+      try {
+        downloadPlaceholderPDF();
+        showNotification('PDF Downloaded Successfully!', 'success');
+      } catch (err) {
+        console.error('PDF download failed:', err);
+        showNotification('Download failed. Please try again.', 'error');
+      }
+    }, 1200);
+  });
+}
+
+/**
+ * Sets up PDF download interaction for the Certificate completion button
+ */
+function initCertificateDownload() {
+  const certBtn = document.getElementById('download-certificate-btn');
+  if (!certBtn) return;
+
+  certBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    showNotification('Preparing Certificate PDF...', 'info');
+
+    setTimeout(() => {
+      try {
+        downloadCertificatePlaceholderPDF();
+        showNotification('Certificate PDF Downloaded!', 'success');
+      } catch (err) {
+        console.error('Certificate download failed:', err);
+        showNotification('Download failed. Please try again.', 'error');
+      }
+    }, 1200);
+  });
+}
+
+function downloadCertificatePlaceholderPDF() {
+  const content = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 130 >>
+stream
+BT
+/F1 18 Tf
+50 700 Td
+(Aira E. Villarito - OJT Completion Record) Tj
+/F1 12 Tf
+0 -40 Td
+(Document: Certificate of Completion Placeholder) Tj
+0 -20 Td
+(This is a verified placeholder document for the Certificate.) Tj
+0 -20 Td
+(Clicking the download button successfully downloads this mockup file.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000120 00000 n 
+0000000250 00000 n 
+0000000424 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+495
+%%EOF`;
+
+  const bytes = new Uint8Array(content.length);
+  for (let i = 0; i < content.length; i++) {
+    bytes[i] = content.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'Aira_Villarito_OJT_Certificate_Placeholder.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Sets up PDF download interaction for the Evaluation placeholder cards
+ */
+function initEvaluationDownloads() {
+  const traineePdf = document.getElementById('trainee-eval-pdf');
+  const performancePdf = document.getElementById('performance-eval-pdf');
+
+  if (traineePdf) {
+    traineePdf.addEventListener('click', (e) => {
+      e.preventDefault();
+      triggerEvaluationDownload('Trainee Evaluation', 'Aira_Villarito_Trainee_Evaluation.pdf');
+    });
+  }
+
+  if (performancePdf) {
+    performancePdf.addEventListener('click', (e) => {
+      e.preventDefault();
+      triggerEvaluationDownload('Performance Evaluation', 'Aira_Villarito_Performance_Evaluation.pdf');
+    });
+  }
+}
+
+function triggerEvaluationDownload(label, fileName) {
+  showNotification(`Preparing ${label} PDF...`, 'info');
+
+  setTimeout(() => {
+    try {
+      downloadEvaluationPlaceholderPDF(label, fileName);
+      showNotification(`${label} PDF Downloaded!`, 'success');
+    } catch (err) {
+      console.error(`${label} download failed:`, err);
+      showNotification('Download failed. Please try again.', 'error');
+    }
+  }, 1200);
+}
+
+function downloadEvaluationPlaceholderPDF(label, fileName) {
+  const content = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 130 >>
+stream
+BT
+/F1 18 Tf
+50 700 Td
+(Aira E. Villarito - OJT Evaluation Record) Tj
+/F1 12 Tf
+0 -40 Td
+(Document: ${label}) Tj
+0 -20 Td
+(This is a verified placeholder document for the OJT Evaluation.) Tj
+0 -20 Td
+(Clicking the card on the portfolio successfully downloads this file.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000120 00000 n 
+0000000250 00000 n 
+0000000418 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+489
+%%EOF`;
+
+  const bytes = new Uint8Array(content.length);
+  for (let i = 0; i < content.length; i++) {
+    bytes[i] = content.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = fileName;
+  
+  document.body.appendChild(link);
+  link.click();
+  
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Generates and triggers the download of a small, valid PDF document
+ */
+function downloadPlaceholderPDF() {
+  // Minimal valid PDF structure writing "Aira E. Villarito - Company Profile"
+  const pdfContent = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 73 >>
+stream
+BT
+/F1 18 Tf
+50 700 Td
+(Aira E. Villarito - OJT Company Profile) Tj
+/F1 12 Tf
+0 -40 Td
+(This is a placeholder document for the OJT Company Profile.) Tj
+0 -20 Td
+(Clicking the card on the portfolio successfully downloads this file.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000120 00000 n 
+0000000242 00000 n 
+0000000366 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+437
+%%EOF`;
+
+  const bytes = new Uint8Array(pdfContent.length);
+  for (let i = 0; i < pdfContent.length; i++) {
+    bytes[i] = pdfContent.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'Aira_Villarito_Company_Profile.pdf';
+  
+  document.body.appendChild(link);
+  link.click();
+  
+  // Cleanup
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Creates and displays a sleek banner notification
+ */
+function showNotification(message, type = 'success') {
+  // Remove existing notification if present
+  const existingToast = document.querySelector('.toast-notification');
+  if (existingToast) existingToast.remove();
+
+  const toast = document.createElement('div');
+  toast.className = `toast-notification toast-${type}`;
+  toast.style.position = 'fixed';
+  toast.style.bottom = '24px';
+  toast.style.right = '24px';
+  toast.style.padding = '12px 24px';
+  toast.style.borderRadius = '8px';
+  toast.style.color = '#fff';
+  toast.style.fontWeight = '600';
+  toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+  toast.style.zIndex = '9999';
+  toast.style.transform = 'translateY(100px)';
+  toast.style.opacity = '0';
+  toast.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+  
+  // Icon based on type
+  let icon = '';
+  if (type === 'success') {
+    toast.style.backgroundColor = '#2ecc71';
+    icon = '✓ ';
+  } else if (type === 'info') {
+    toast.style.backgroundColor = '#3498db';
+    icon = 'ℹ ';
+  } else {
+    toast.style.backgroundColor = '#e74c3c';
+    icon = '⚠ ';
+  }
+
+  toast.textContent = icon + message;
+  document.body.appendChild(toast);
+
+  // Force reflow
+  toast.offsetHeight;
+
+  // Slide up
+  toast.style.transform = 'translateY(0)';
+  toast.style.opacity = '1';
+
+  // Fade out
+  setTimeout(() => {
+    toast.style.transform = 'translateY(20px)';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+/**
+ * Sets up PDF download interaction for requirement cards and certificate download button
+ */
+function initRequirementDownloads() {
+  const reqButtons = document.querySelectorAll('.req-action-btn');
+  reqButtons.forEach(btn => {
+    // Only bind if it doesn't already have an inline handler doing something else
+    if (btn.getAttribute('onclick')) return;
+    
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const labelElement = btn.querySelector('span');
+      const label = labelElement ? labelElement.textContent : 'Document';
+      
+      showNotification(`Preparing ${label}...`, 'info');
+
+      setTimeout(() => {
+        try {
+          downloadDocumentPlaceholder(label);
+          showNotification(`${label} Downloaded!`, 'success');
+        } catch (err) {
+          console.error('Download failed:', err);
+          showNotification('Download failed.', 'error');
+        }
+      }, 1000);
+    });
+  });
+}
+
+/**
+ * Dynamically generates a valid PDF document specific to the OJT requirement name and downloads it
+ */
+function downloadDocumentPlaceholder(fileName) {
+  const content = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 130 >>
+stream
+BT
+/F1 18 Tf
+50 700 Td
+(Aira E. Villarito - OJT Portfolio Document) Tj
+/F1 12 Tf
+0 -40 Td
+(Requirement: ${fileName}) Tj
+0 -20 Td
+(This is a verified placeholder document for the selected OJT requirement.) Tj
+0 -20 Td
+(It has been dynamically generated in PDF format.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000120 00000 n 
+0000000269 00000 n 
+0000000423 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+494
+%%EOF`;
+
+  const bytes = new Uint8Array(content.length);
+  for (let i = 0; i < content.length; i++) {
+    bytes[i] = content.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement('a');
+  link.href = url;
+  
+  // Clean filename: e.g. "Download Resume" -> "Aira_Villarito_Resume.pdf"
+  const cleanName = fileName.replace('Download ', '').replace(/\s+/g, '_');
+  link.download = `Aira_Villarito_${cleanName}.pdf`;
+  
+  document.body.appendChild(link);
+  link.click();
+  
+  // Cleanup
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Interactive Weekly Progress Report Card Preview & Hover Download
+ */
+let currentPreviewWeekNum = null;
+let currentPreviewDateRange = null;
+let hasDownloadedThisSession = false;
+
+function initWeeklyReportPreview() {
+  const overlay = document.getElementById('report-preview-overlay');
+  const closeBtn = document.getElementById('preview-close-btn');
+  const folderWrapper = document.getElementById('preview-folder-wrapper');
+
+  if (!overlay || !closeBtn || !folderWrapper) return;
+
+  // Close preview when close button is clicked
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    overlay.classList.remove('visible');
+    currentPreviewWeekNum = null;
+    currentPreviewDateRange = null;
+  });
+
+  // Close preview when clicking outside the widget
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('visible');
+      currentPreviewWeekNum = null;
+      currentPreviewDateRange = null;
+    }
+  });
+
+  // Trigger PDF download when the folder is clicked
+  folderWrapper.addEventListener('click', () => {
+    if (currentPreviewWeekNum) {
+      showNotification(`Downloading Week ${currentPreviewWeekNum} Report PDF...`, 'success');
+      downloadWeeklyReportPDF(currentPreviewWeekNum);
+    }
+  });
+}
+
+function openWeeklyReportPreview(weekNum, dateRange) {
+  const overlay = document.getElementById('report-preview-overlay');
+  const dateRangeEl = document.getElementById('mini-date-range');
+  const weekBadgeEl = document.getElementById('mini-week-badge');
+  
+  const day1El = document.getElementById('mini-cell-day-1');
+  const day2El = document.getElementById('mini-cell-day-2');
+  const day3El = document.getElementById('mini-cell-day-3');
+  
+  const act1El = document.getElementById('mini-cell-act-1');
+  const act2El = document.getElementById('mini-cell-act-2');
+  const act3El = document.getElementById('mini-cell-act-3');
+
+  if (!overlay) return;
+
+  // Set current context
+  currentPreviewWeekNum = weekNum;
+  currentPreviewDateRange = dateRange;
+  hasDownloadedThisSession = false; // Reset lock for new download session
+
+  // Update dynamic content elements
+  if (dateRangeEl) dateRangeEl.textContent = dateRange;
+  if (weekBadgeEl) weekBadgeEl.textContent = `WEEK ${weekNum.toString().padStart(2, '0')}`;
+
+  // Shading/Table row updates based on Week Number
+  if (weekNum === 1) {
+    if (day1El) day1El.textContent = "July 12 (Sat)";
+    if (act1El) act1El.textContent = "Introduction to Company, Orientation";
+    
+    if (day2El) day2El.textContent = "July 13 (Sun)";
+    if (act2El) act2El.textContent = "Project Presentation & Goals";
+    
+    if (day3El) day3El.textContent = "July 14 (Mon)";
+    if (act3El) act3El.textContent = "Assigned to designated Projects";
+  } else {
+    // Shading data for placeholder reports (Weeks 2-8)
+    if (day1El) day1El.textContent = "Day 1 (Mon)";
+    if (act1El) act1El.textContent = `Week ${weekNum} Core Coding & Setup`;
+    
+    if (day2El) day2El.textContent = "Day 2 (Tue)";
+    if (act2El) act2El.textContent = "Database Schema Shading & API Dev";
+    
+    if (day3El) day3El.textContent = "Day 3 (Wed)";
+    if (act3El) act3El.textContent = "Weekly Unit Testing & Bug fixes";
+  }
+
+  // Display overlay
+  overlay.classList.add('visible');
+  showNotification(`Opened Week ${weekNum} report folder. Hover folder to download!`, 'info');
+}
+
+/**
+ * Static PDF download for weekly reports from pdf/weekly report/ directory
+ */
+function downloadWeeklyReportPDF(weekNum) {
+  const link = document.createElement('a');
+  link.href = `pdf/weekly%20report/VILLARITO_Week%23${weekNum}_Report.pdf`;
+  link.download = `VILLARITO_Week#${weekNum}_Report.pdf`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
