@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCertificateDownload();
   initRequirementDownloads();
   initWeeklyReportPreview();
+  setupMobileNavbar();
 });
 
 /**
@@ -28,8 +29,8 @@ function initScrollReveal() {
         }
       });
     }, {
-      threshold: 0.15, // Trigger when 15% of the element is visible
-      rootMargin: '0px 0px -50px 0px' // Slightly offset bottom trigger
+      threshold: 0.05, // Trigger when 5% of the element is visible (safe for tall grids on mobile)
+      rootMargin: '0px 0px -10px 0px' // Reduced offset for prompt loading
     });
     
     revealElements.forEach(element => {
@@ -575,4 +576,61 @@ function downloadWeeklyReportPDF(weekNum) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+/**
+ * Setup and handle mobile responsive navbar hamburger interaction
+ */
+function setupMobileNavbar() {
+  const navbarContainer = document.querySelector('.navbar-container');
+  if (!navbarContainer) return;
+
+  // 1. Create hamburger button
+  const hamburger = document.createElement('button');
+  hamburger.className = 'hamburger-menu';
+  hamburger.id = 'hamburger-menu';
+  hamburger.setAttribute('aria-label', 'Toggle Navigation');
+  hamburger.innerHTML = '<span></span><span></span><span></span>';
+
+  // 2. Insert it before the .nav-links container
+  const navLinks = navbarContainer.querySelector('.nav-links');
+  if (navLinks) {
+    navbarContainer.insertBefore(hamburger, navLinks);
+  }
+
+  // 3. Create text spans dynamically inside each link using the image's alt text
+  if (navLinks) {
+    navLinks.querySelectorAll('.nav-item').forEach(link => {
+      const img = link.querySelector('.nav-btn-img');
+      if (img && !link.querySelector('.nav-btn-text')) {
+        const textSpan = document.createElement('span');
+        textSpan.className = 'nav-btn-text';
+        textSpan.textContent = img.getAttribute('alt') || '';
+        link.appendChild(textSpan);
+      }
+    });
+  }
+
+  // 4. Toggle active class on hamburger and nav-links
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('open');
+    }
+  });
+
+  // Close menu when a link inside is clicked
+  navLinks.querySelectorAll('.nav-item').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
 }
