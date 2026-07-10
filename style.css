@@ -614,6 +614,11 @@ section {
   color: #117a65;
 }
 
+.req-status-badge.processing {
+    background-color: #fff3cd; /* Light yellow background */
+    color: #856404;            /* Darker golden/brown text for readability */
+}
+
 .req-title {
   font-size: 1.25rem;
   font-weight: 700;
