@@ -5,7 +5,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
-  initPDFDownload();
   initEvaluationDownloads();
   initCertificateDownload();
   initRequirementDownloads();
@@ -44,31 +43,7 @@ function initScrollReveal() {
   }
 }
 
-/**
- * Sets up PDF download interaction for the Company Profile placeholder card
- */
-function initPDFDownload() {
-  const pdfCard = document.getElementById('company-profile-pdf');
-  if (!pdfCard) return;
 
-  pdfCard.addEventListener('click', (e) => {
-    e.preventDefault();
-    
-    // Create a temporary status notification
-    showNotification('Preparing PDF Download...', 'info');
-
-    // Simulate network delay for premium feel
-    setTimeout(() => {
-      try {
-        downloadPlaceholderPDF();
-        showNotification('PDF Downloaded Successfully!', 'success');
-      } catch (err) {
-        console.error('PDF download failed:', err);
-        showNotification('Download failed. Please try again.', 'error');
-      }
-    }, 1200);
-  });
-}
 
 /**
  * Sets up PDF download interaction for the Certificate completion button
@@ -250,73 +225,6 @@ startxref
   document.body.appendChild(link);
   link.click();
   
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
-
-/**
- * Generates and triggers the download of a small, valid PDF document
- */
-function downloadPlaceholderPDF() {
-  // Minimal valid PDF structure writing "Aira E. Villarito - Company Profile"
-  const pdfContent = `%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
-endobj
-4 0 obj
-<< /Length 73 >>
-stream
-BT
-/F1 18 Tf
-50 700 Td
-(Aira E. Villarito - OJT Company Profile) Tj
-/F1 12 Tf
-0 -40 Td
-(This is a placeholder document for the OJT Company Profile.) Tj
-0 -20 Td
-(Clicking the card on the portfolio successfully downloads this file.) Tj
-ET
-endstream
-endobj
-5 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
-endobj
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000062 00000 n 
-0000000120 00000 n 
-0000000242 00000 n 
-0000000366 00000 n 
-trailer
-<< /Size 6 /Root 1 0 R >>
-startxref
-437
-%%EOF`;
-
-  const bytes = new Uint8Array(pdfContent.length);
-  for (let i = 0; i < pdfContent.length; i++) {
-    bytes[i] = pdfContent.charCodeAt(i);
-  }
-
-  const blob = new Blob([bytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-  
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'Aira_Villarito_Company_Profile.pdf';
-  
-  document.body.appendChild(link);
-  link.click();
-  
-  // Cleanup
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }

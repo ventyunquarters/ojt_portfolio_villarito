@@ -16,6 +16,10 @@
   <div class="bg-patterns">
     <img src="assets/glob_ht_bg.png" alt="Decorative halftone globe" class="pattern-glob">
     <img src="assets/star_ht_bg.png" alt="Decorative halftone star" class="pattern-star">
+    <!-- ID Lanyard Badge (Mobile/Tablet background decoration) -->
+    <div class="id-lanyard-wrapper mobile-only">
+      <img src="assets/id.png" alt="OJT ID lanyard badge" class="id-img">
+    </div>
   </div>
 
   <!-- Header / Navigation Bar -->
@@ -48,10 +52,6 @@
     <!-- Title Section (Logo Below Navigation) -->
     <div class="title-section">
       <img src="assets/logo.png" alt="On-The-Job Training Tracker" class="logo-img">
-      <!-- Lanyard Badge Image (Mobile/Tablet only) -->
-      <div class="id-lanyard-wrapper mobile-only">
-        <img src="assets/id.png" alt="OJT ID lanyard badge" class="id-img">
-      </div>
     </div>
 
     <!-- About / Profile Section -->
@@ -101,9 +101,8 @@
       <h2 class="section-title">Company Profile</h2>
       <div class="company-container">
 
-        <!-- 3D PDF Viewer Card (Triggers download on click) -->
-        <div class="pdf-placeholder-card" id="company-profile-pdf" tabindex="0"
-          aria-label="Download Company Profile PDF">
+        <!-- Company Profile Image Placeholder -->
+        <div class="pdf-placeholder-card" id="company-profile-pdf">
           <div class="pdf-header-bar">
             <span class="pdf-icon-badge">PDF</span>
             <div class="pdf-dots">
@@ -137,17 +136,6 @@
             <div class="pdf-skeleton-lines">
               <div class="skeleton-line medium" style="margin: 0 auto;"></div>
             </div>
-          </div>
-
-          <!-- Download Overlay -->
-          <div class="pdf-download-overlay">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Download PDF</span>
           </div>
         </div>
 

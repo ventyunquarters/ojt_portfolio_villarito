@@ -429,11 +429,6 @@ section {
   background: linear-gradient(to left, rgba(0, 0, 0, 0.05), transparent);
 }
 
-.pdf-placeholder-card:hover {
-  transform: translateY(-12px) rotate(-1deg);
-  box-shadow: 0 25px 50px rgba(139, 0, 0, 0.15), 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
 .pdf-header-bar {
   background-color: #f8f9fa;
   padding: 0.6rem 1rem;
@@ -526,6 +521,12 @@ section {
   stroke-width: 1.5;
 }
 
+/* Hover effect for interactive PDF cards */
+.pdf-placeholder-card:hover {
+  transform: translateY(-12px) rotate(-1deg);
+  box-shadow: 0 25px 50px rgba(139, 0, 0, 0.15), 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
 /* Download Overlay */
 .pdf-download-overlay {
   position: absolute;
@@ -561,6 +562,16 @@ section {
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+/* Company Profile card on home page */
+#company-profile-pdf {
+  cursor: default;
+}
+
+#company-profile-pdf:hover {
+  transform: none;
+  box-shadow: var(--shadow-pdf);
 }
 
 /* Requirements Page Elements */
@@ -628,7 +639,7 @@ section {
   border-radius: 8px;
   transition: var(--transition-smooth);
   font-size: 0.9rem;
-  word-break: break-word;
+  white-space: nowrap;
   text-align: center;
 }
 
@@ -1028,37 +1039,42 @@ footer {
   }
 
   .title-section {
-    flex-wrap: nowrap !important;
-    /* Force logo and lanyard to remain side-by-side on same row */
-    gap: 1.5rem;
+    position: relative;
+    flex-direction: column;
+    gap: 0;
     padding-top: 2rem;
     align-items: center;
     justify-content: center;
   }
 
   .logo-img {
-    width: 50%;
-    max-width: 400px;
-    /* Scaled up on tablet viewports */
+    width: 65%;
+    max-width: 420px;
   }
 
-  .title-section .id-lanyard-wrapper.mobile-only {
+  /* ID lanyard as fixed background decoration */
+  .bg-patterns .id-lanyard-wrapper.mobile-only {
     display: block !important;
-    width: 30%;
-    max-width: 180px;
-    /* Scaled up on tablet viewports */
+    position: absolute;
+    top: 2%;
+    right: -8%;
+    width: auto;
+    max-width: none;
     height: auto;
     overflow: visible;
-    flex-shrink: 0;
+    opacity: 0.35;
+    pointer-events: none;
   }
 
-  .title-section .id-lanyard-wrapper.mobile-only .id-img {
+  .bg-patterns .id-lanyard-wrapper.mobile-only .id-img {
     position: relative;
     top: auto;
     left: auto;
-    width: 100%;
-    max-width: 180px;
+    width: 550px;
+    max-width: none;
     height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
+    animation: none;
   }
 
   .profile-container {
@@ -1213,9 +1229,8 @@ footer {
   }
 
   .logo-img {
-    width: 60%;
-    max-width: 240px;
-    /* Synchronized relative scaling */
+    width: 70%;
+    max-width: 300px;
   }
 
   .profile-container {
@@ -1308,17 +1323,18 @@ footer {
   }
 
   .logo-img {
-    width: 60% !important;
-    max-width: 220px !important;
+    width: 75% !important;
+    max-width: 260px !important;
   }
 
-  .title-section .id-lanyard-wrapper.mobile-only {
-    width: 35% !important;
-    max-width: 110px !important;
+  .bg-patterns .id-lanyard-wrapper.mobile-only {
+    top: 2% !important;
+    right: -12% !important;
+    opacity: 0.3 !important;
   }
 
-  .title-section .id-lanyard-wrapper.mobile-only .id-img {
-    max-width: 110px !important;
+  .bg-patterns .id-lanyard-wrapper.mobile-only .id-img {
+    width: 420px !important;
   }
 
   .pdf-placeholder-card {
