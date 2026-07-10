@@ -1057,12 +1057,12 @@ footer {
     display: block !important;
     position: absolute;
     top: 2%;
-    right: -8%;
+    right: -10%;
     width: auto;
     max-width: none;
     height: auto;
     overflow: visible;
-    opacity: 0.35;
+    opacity: 0.6;
     pointer-events: none;
   }
 
@@ -1070,7 +1070,7 @@ footer {
     position: relative;
     top: auto;
     left: auto;
-    width: 550px;
+    width: 750px;
     max-width: none;
     height: auto;
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
@@ -1328,9 +1328,7 @@ footer {
   }
 
   .bg-patterns .id-lanyard-wrapper.mobile-only {
-    top: 2% !important;
     right: -12% !important;
-    opacity: 0.3 !important;
   }
 
   .bg-patterns .id-lanyard-wrapper.mobile-only .id-img {
