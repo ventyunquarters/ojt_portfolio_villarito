@@ -311,76 +311,43 @@ function initRequirementDownloads() {
     });
   });
 }
-
 /**
- * Dynamically generates a valid PDF document specific to the OJT requirement name and downloads it
+ * Named for the pdf files in the pdf folder
  */
 function downloadDocumentPlaceholder(fileName) {
-  const content = `%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
-endobj
-4 0 obj
-<< /Length 130 >>
-stream
-BT
-/F1 18 Tf
-50 700 Td
-(Aira E. Villarito - OJT Portfolio Document) Tj
-/F1 12 Tf
-0 -40 Td
-(Requirement: ${fileName}) Tj
-0 -20 Td
-(This is a verified placeholder document for the selected OJT requirement.) Tj
-0 -20 Td
-(It has been dynamically generated in PDF format.) Tj
-ET
-endstream
-endobj
-5 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
-endobj
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000062 00000 n 
-0000000120 00000 n 
-0000000269 00000 n 
-0000000423 00000 n 
-trailer
-<< /Size 6 /Root 1 0 R >>
-startxref
-494
-%%EOF`;
+  // 1. Normalize the input name (e.g., "Download Medical Certificate" -> "medical certificate")
+  const cleanName = fileName.replace('Download ', '').trim().toLowerCase();
 
-  const bytes = new Uint8Array(content.length);
-  for (let i = 0; i < content.length; i++) {
-    bytes[i] = content.charCodeAt(i);
+  const fileMapping = {
+    'medical certificate': 'pdf/weekly report/VILLARITO_medical_certificate.pdf',
+    'insurance': 'pdf/weekly report/VILLARITO_OJT_Insurance.pdf',
+    'cv': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
+    'resume': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
+    'letter of endorsement': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
+    'endorsement letter': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
+    'letter of intent': 'pdf/weekly report/VILLARITO_Letter_Of_Intent.pdf',
+  };
+
+  const filePath = fileMapping[cleanName];
+
+  
+  if (!filePath) {
+    console.error(`Could not find a real file mapped for: "${fileName}" (clean name: "${cleanName}")`);
+    return;
   }
 
-  const blob = new Blob([bytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
   
   const link = document.createElement('a');
-  link.href = url;
+  link.href = filePath;
   
-  // Clean filename: e.g. "Download Resume" -> "Aira_Villarito_Resume.pdf"
-  const cleanName = fileName.replace('Download ', '').replace(/\s+/g, '_');
-  link.download = `Aira_Villarito_${cleanName}.pdf`;
+  
+  link.download = filePath.split('/').pop(); 
   
   document.body.appendChild(link);
   link.click();
   
   // Cleanup
   document.body.removeChild(link);
-  URL.revokeObjectURL(url);
 }
 
 /**
