@@ -2197,3 +2197,57 @@ footer {
 .pdf-open-tab-btn:hover {
   text-decoration: underline;
 }
+
+/* Container for the dual Preview/Download buttons */
+.req-btn-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: auto; /* Aligns buttons perfectly at the bottom of the card */
+}
+
+/* Ensure <button> elements inherit the exact styling of your <a> action buttons */
+button.req-action-btn {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Custom styling and hover effects for the maroon Preview button */
+button.req-action-btn-preview {
+  background-color: #7A0016 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button.req-action-btn-preview:hover {
+  background-color: #5a0010 !important; /* Slightly darker shade on hover */
+  transform: translateY(-1px);
+}
+
+.pdf-modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-text, #333);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  pointer-events: auto; /* Ensures browser registers clicks on this button */
+}
+
+.pdf-modal-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Light circle background on hover */
+}

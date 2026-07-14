@@ -284,18 +284,18 @@ function showNotification(message, type = 'success') {
 }
 
 /**
- * Sets up PDF download interaction for requirement cards and certificate download button
+ * Sets up PDF download interaction safely for placeholder requirement cards
  */
 function initRequirementDownloads() {
   const reqButtons = document.querySelectorAll('.req-action-btn');
   reqButtons.forEach(btn => {
-    // Only bind if it doesn't already have an inline handler doing something else
-    if (btn.getAttribute('onclick')) return;
+    // CRITICAL FIX: Skip if it has an inline handler OR points to a real file path instead of '#'
+    if (btn.getAttribute('onclick') || (btn.getAttribute('href') && btn.getAttribute('href') !== '#')) return;
     
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const labelElement = btn.querySelector('span');
-      const label = labelElement ? labelElement.textContent : 'Document';
+      const label = labelElement ? labelElement.textContent.replace('Download ', '') : 'Document';
       
       showNotification(`Preparing ${label}...`, 'info');
 
@@ -311,61 +311,161 @@ function initRequirementDownloads() {
     });
   });
 }
+
 /**
- * Opens the modern modal viewer containing the actual path file
- * @param {string} docName - Name of the requirement target document
- * @param {string} categoryName - Category description sublabel
+ * FIXED: Missing function to generate and download mock PDF vectors for requirements
+ */
+function downloadDocumentPlaceholder(label) {
+  const content = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 140 >>
+stream
+BT
+/F1 18 Tf
+50 700 Td
+(Aira E. Villarito - OJT Academic Record) Tj
+/F1 12 Tf
+0 -40 Td
+(Document Mockup: ${label}) Tj
+0 -20 Td
+(This is a verified placeholder document for this submission requirement.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000120 00000 n 
+0000000250 00000 n 
+0000000418 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+489
+%%EOF`;
+
+  const bytes = new Uint8Array(content.length);
+  for (let i = 0; i < content.length; i++) {
+    bytes[i] = content.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `VILLARITO_${label.replace(/\s+/g, '_')}_Placeholder.pdf`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/**
+/**
+ * Helper: Toast Notification System
+ */
+function showNotification(message, type = 'success') {
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-notification';
+        toast.style.cssText = 'position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; color: #fff; border-radius: 6px; z-index: 10000; font-family: sans-serif; font-size: 14px; transition: all 0.3s ease; opacity: 0; transform: translateY(20px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+        document.body.appendChild(toast);
+    }
+    
+    toast.textContent = message;
+    toast.style.background = type === 'error' ? '#ef4444' : '#10b981';
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+    }, 3000);
+}
+
+/**
+ * Helper: Triggers PDF File Download
+ */
+function downloadWeeklyReportPDF(weekNum) {
+    const filePath = `pdf/weekly report/VILLARITO_Week#${weekNum}_Report.pdf`;
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = `VILLARITO_Week#${weekNum}_Report.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
+/**
+ * Opens the modern modal viewer with safe fallback notice management
  */
 function openDocumentPreview(docName, categoryName = "Before On-the-Job Training") {
-  const cleanName = docName.trim().toLowerCase();
-  
-  // Exact path mapping to files in your repository structure
-  const fileMapping = {
-    'medical certificate': 'pdf/weekly report/VILLARITO_medical_certificate.pdf',
-    'insurance': 'pdf/weekly report/VILLARITO_OJT_Insurance.pdf',
-    'cv': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
-    'resume': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
-    'letter of endorsement': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
-    'endorsement letter': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
-    'letter of intent': 'pdf/weekly report/VILLARITO_Letter_Of_Intent.pdf',
-    'weekly report 1': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf',
-    'week 1 report': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf'
-  };
+    const cleanName = docName.trim().toLowerCase();
+    
+    const fileMapping = {
+        'medical certificate': 'pdf/weekly report/VILLARITO_medical_certificate.pdf',
+        'insurance': 'pdf/weekly report/VILLARITO_OJT_Insurance.pdf',
+        'cv': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
+        'resume': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
+        'letter of endorsement': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
+        'endorsement letter': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
+        'letter of intent': 'pdf/weekly report/VILLARITO_Letter_Of_Intent.pdf',
+        'weekly report 1': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf',
+        'week 1 report': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf'
+    };
 
-  const filePath = fileMapping[cleanName];
+    const filePath = fileMapping[cleanName];
 
-  if (!filePath) {
-    console.error(`Missing active file path map configuration for item: "${docName}"`);
-    return;
-  }
+    if (!filePath) {
+        showNotification(`Preview unavailable for "${docName}". Mock download fallback active.`, 'error');
+        return;
+    }
 
-  // Populate structural textual parameters dynamically 
-  document.getElementById('modal-doc-title').innerText = docName;
-  document.getElementById('modal-doc-category').innerText = categoryName;
-  document.getElementById('pdf-preview-frame').src = filePath;
-  document.getElementById('modal-open-link').href = filePath;
+    const modal = document.getElementById('pdf-preview-modal');
+    const frame = document.getElementById('pdf-preview-frame');
+    const titleEl = document.getElementById('modal-doc-title');
+    const categoryEl = document.getElementById('modal-doc-category');
+    const openLink = document.getElementById('modal-open-link');
 
-  // Toggle visible display overlay status
-  document.getElementById('pdf-preview-modal').classList.add('active');
+    if (modal && frame) {
+        frame.src = filePath;
+        if (titleEl) titleEl.textContent = docName;
+        if (categoryEl) categoryEl.textContent = categoryName;
+        if (openLink) openLink.href = filePath;
+
+        modal.classList.add('active');
+    }
 }
 
 /**
- * Closes and flushes active source targets inside the preview layout container
+ * Closes the document preview modal and terminates background iframe loading
  */
 function closePreview() {
-  const modal = document.getElementById('pdf-preview-modal');
-  modal.classList.remove('active');
-  // Clear the active element location path value to stop resource background processes
-  document.getElementById('pdf-preview-frame').src = "";
+    const modal = document.getElementById('pdf-preview-modal');
+    const frame = document.getElementById('pdf-preview-frame');
+    
+    if (modal) {
+        modal.classList.remove('active');
+    }
+    if (frame) {
+        frame.src = ''; // Stops PDF from processing/consuming memory in background
+    }
 }
-
-// Global hook to catch outer clicks from user outside container boundaries
-window.addEventListener('click', function(event) {
-  const modal = document.getElementById('pdf-preview-modal');
-  if (event.target === modal) {
-    closePreview();
-  }
-});
 
 /**
  * Interactive Weekly Progress Report Card Preview & Hover Download
@@ -375,37 +475,55 @@ let currentPreviewDateRange = null;
 let hasDownloadedThisSession = false;
 
 function initWeeklyReportPreview() {
-  const overlay = document.getElementById('report-preview-overlay');
-  const closeBtn = document.getElementById('preview-close-btn');
-  const folderWrapper = document.getElementById('preview-folder-wrapper');
+    const overlay = document.getElementById('report-preview-overlay');
+    const closeBtn = document.getElementById('preview-close-btn');
+    const folderWrapper = document.getElementById('preview-folder-wrapper');
 
-  if (!overlay || !closeBtn || !folderWrapper) return;
+    if (!overlay || !closeBtn || !folderWrapper) return;
 
-  // Close preview when close button is clicked
-  closeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    overlay.classList.remove('visible');
-    currentPreviewWeekNum = null;
-    currentPreviewDateRange = null;
-  });
+    // Close preview when close button is clicked
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        overlay.classList.remove('visible');
+        currentPreviewWeekNum = null;
+        currentPreviewDateRange = null;
+    });
 
-  // Close preview when clicking outside the widget
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.classList.remove('visible');
-      currentPreviewWeekNum = null;
-      currentPreviewDateRange = null;
-    }
-  });
+    // Close preview when clicking outside the widget
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove('visible');
+            currentPreviewWeekNum = null;
+            currentPreviewDateRange = null;
+        }
+    });
 
-  // Trigger PDF download when the folder is clicked
-  folderWrapper.addEventListener('click', () => {
-    if (currentPreviewWeekNum) {
-      showNotification(`Downloading Week ${currentPreviewWeekNum} Report PDF...`, 'success');
-      downloadWeeklyReportPDF(currentPreviewWeekNum);
-    }
-  });
+    // Trigger PDF download when the folder is clicked
+    folderWrapper.addEventListener('click', () => {
+        if (currentPreviewWeekNum) {
+            showNotification(`Downloading Week ${currentPreviewWeekNum} Report PDF...`, 'success');
+            downloadWeeklyReportPDF(currentPreviewWeekNum);
+        }
+    });
 }
+
+/**
+ * Main DOM Initialization
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize the background overlay click tracker for the main modal
+    const modal = document.getElementById('pdf-preview-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closePreview();
+            }
+        });
+    }
+
+    // 2. Initialize weekly report event listeners
+    initWeeklyReportPreview();
+});
 
 function openWeeklyReportPreview(weekNum, dateRange) {
   const overlay = document.getElementById('report-preview-overlay');
