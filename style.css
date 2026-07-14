@@ -2054,3 +2054,146 @@ footer {
   margin-top: 1rem;
   border: 1px solid #fadbd8;
 }
+
+/* Dark blurred layout background overlay */
+.pdf-modal-overlay {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Modal activation class trigger */
+.pdf-modal-overlay.active {
+  display: flex;
+}
+
+/* White centered card structure */
+.pdf-modal-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 1050px;
+  height: 88vh;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header Elements */
+.pdf-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #EDEDED;
+}
+
+.pdf-modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pdf-modal-icon-box {
+  background: rgba(122, 0, 22, 0.06);
+  color: #7A0016;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdf-modal-title-group h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1A1A1A;
+  font-weight: 700;
+}
+
+.pdf-modal-title-group p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: #777777;
+}
+
+.pdf-modal-close-btn {
+  background: #F3F3F3;
+  border: none;
+  font-size: 1.6rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555555;
+  transition: all 0.2s ease;
+}
+
+.pdf-modal-close-btn:hover {
+  background: #EAEAEA;
+  color: #000000;
+}
+
+/* Embedded Frame Area */
+.pdf-modal-body {
+  flex: 1;
+  background: #F8F9FA;
+}
+
+#pdf-preview-frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Footer Control Layout */
+.pdf-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid #EDEDED;
+  background: #ffffff;
+}
+
+.pdf-status-pill {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.pdf-open-tab-btn {
+  color: #7A0016;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.pdf-open-tab-btn:hover {
+  text-decoration: underline;
+}

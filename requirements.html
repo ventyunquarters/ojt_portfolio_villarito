@@ -303,6 +303,48 @@
   </footer>
 
   <script src="script.js"></script>
+
+<!-- Reusable PDF Preview Modal -->
+<div id="pdf-preview-modal" class="pdf-modal-overlay">
+  <div class="pdf-modal-container">
+    
+    <!-- Modal Header -->
+    <div class="pdf-modal-header">
+      <div class="pdf-modal-title-group">
+        <div class="pdf-modal-icon-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+        </div>
+        <div>
+          <h3 id="modal-doc-title">Document Title</h3>
+          <p id="modal-doc-category">Requirement Category</p>
+        </div>
+      </div>
+      <button class="pdf-modal-close-btn" onclick="closePreview()">&times;</button>
+    </div>
+
+    <!-- Modal Embedded Frame Body -->
+    <div class="pdf-modal-body">
+      <iframe id="pdf-preview-frame" src="" frameborder="0"></iframe>
+    </div>
+
+    <!-- Modal Footer Controls -->
+    <div class="pdf-modal-footer">
+      <span class="pdf-status-pill">● Uploaded</span>
+      <a id="modal-open-link" href="#" target="_blank" class="pdf-open-tab-btn">
+        Open in new tab 
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" style="margin-left: 2px; display: inline-block; vertical-align: middle;">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
 </body>
 
 </html>

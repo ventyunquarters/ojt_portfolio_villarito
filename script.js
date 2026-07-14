@@ -312,12 +312,14 @@ function initRequirementDownloads() {
   });
 }
 /**
- * Named for the pdf files in the pdf folder
+ * Opens the modern modal viewer containing the actual path file
+ * @param {string} docName - Name of the requirement target document
+ * @param {string} categoryName - Category description sublabel
  */
-function downloadDocumentPlaceholder(fileName) {
-  // 1. Normalize the input name (e.g., "Download Medical Certificate" -> "medical certificate")
-  const cleanName = fileName.replace('Download ', '').trim().toLowerCase();
-
+function openDocumentPreview(docName, categoryName = "Before On-the-Job Training") {
+  const cleanName = docName.trim().toLowerCase();
+  
+  // Exact path mapping to files in your repository structure
   const fileMapping = {
     'medical certificate': 'pdf/weekly report/VILLARITO_medical_certificate.pdf',
     'insurance': 'pdf/weekly report/VILLARITO_OJT_Insurance.pdf',
@@ -326,29 +328,44 @@ function downloadDocumentPlaceholder(fileName) {
     'letter of endorsement': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
     'endorsement letter': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
     'letter of intent': 'pdf/weekly report/VILLARITO_Letter_Of_Intent.pdf',
+    'weekly report 1': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf',
+    'week 1 report': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf'
   };
 
   const filePath = fileMapping[cleanName];
 
-  
   if (!filePath) {
-    console.error(`Could not find a real file mapped for: "${fileName}" (clean name: "${cleanName}")`);
+    console.error(`Missing active file path map configuration for item: "${docName}"`);
     return;
   }
 
-  
-  const link = document.createElement('a');
-  link.href = filePath;
-  
-  
-  link.download = filePath.split('/').pop(); 
-  
-  document.body.appendChild(link);
-  link.click();
-  
-  // Cleanup
-  document.body.removeChild(link);
+  // Populate structural textual parameters dynamically 
+  document.getElementById('modal-doc-title').innerText = docName;
+  document.getElementById('modal-doc-category').innerText = categoryName;
+  document.getElementById('pdf-preview-frame').src = filePath;
+  document.getElementById('modal-open-link').href = filePath;
+
+  // Toggle visible display overlay status
+  document.getElementById('pdf-preview-modal').classList.add('active');
 }
+
+/**
+ * Closes and flushes active source targets inside the preview layout container
+ */
+function closePreview() {
+  const modal = document.getElementById('pdf-preview-modal');
+  modal.classList.remove('active');
+  // Clear the active element location path value to stop resource background processes
+  document.getElementById('pdf-preview-frame').src = "";
+}
+
+// Global hook to catch outer clicks from user outside container boundaries
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('pdf-preview-modal');
+  if (event.target === modal) {
+    closePreview();
+  }
+});
 
 /**
  * Interactive Weekly Progress Report Card Preview & Hover Download
