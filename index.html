@@ -83,7 +83,7 @@
             <span>OJT Hours: <strong class="highlight">300 Hours</strong></span>
           </div>
           <p class="profile-desc">
-            A second-year Bachelor of Science in Computer Engineering Student. This website serves as my On-the-Job
+            A second-year Bachelor of Science in Computer Engineering Student and currently an intern at SYSU International Inc. This website serves as my On-the-Job
             Training profile as I document my journey on this program.
           </p>
         </div>
@@ -96,18 +96,21 @@
       </div>
     </section>
 
-    <!-- OJT Progress Card -->
-    <div class="progress-card-container">
-    <div class="progress-card-meta">
-      <span class="progress-card-status">Completed Hours</span>
-      <span class="progress-card-metrics"><strong>24</strong> / 300 Hours <span class="percent-badge">(8%)</span></span>
-    </div>
-  
-      <div class="progress-card-track">
-        <!-- Width set to 8% to represent 24/300 hours -->
-        <div class="progress-card-fill" style="width: 8%;"></div>
-      </div>
-    </div>
+<!-- OJT Progress Card -->
+<div class="progress-card-container" id="ojt-progress-card" data-completed="32" data-total="300">
+  <div class="progress-card-meta">
+    <span class="progress-card-status">Completed Hours</span>
+    <span class="progress-card-metrics">
+      <strong id="progress-completed">32</strong> / <span id="progress-total">300</span> Hours 
+      <span class="percent-badge" id="progress-badge">(11%)</span>
+    </span>
+  </div>
+
+  <div class="progress-card-track">
+    <!-- The width will be managed dynamically by JavaScript, fallback preset here -->
+    <div class="progress-card-fill" id="progress-fill" style="width: 11%;"></div>
+  </div>
+</div>
 
     <!-- Company Profile Section -->
     <section class="reveal reveal-delay-1" id="company-section">

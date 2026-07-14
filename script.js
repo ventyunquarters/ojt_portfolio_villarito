@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initProgressTracker();
   initScrollReveal();
   initEvaluationDownloads();
   initCertificateDownload();
@@ -11,6 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
   initWeeklyReportPreview();
   setupMobileNavbar();
 });
+
+
+/**
+ * Automatically calculates and updates the OJT hours progress bar and metrics
+ */
+function initProgressTracker() {
+  const card = document.getElementById('ojt-progress-card');
+  if (!card) return;
+
+  // Read data values directly from HTML data attributes
+  const completed = parseFloat(card.dataset.completed) || 0;
+  const total = parseFloat(card.dataset.total) || 300;
+  
+  // Calculate percentage safely capped at 100%
+  const percentage = Math.min(Math.round((completed / total) * 100), 100);
+
+  // Target the dynamic DOM elements
+  const completedEl = document.getElementById('progress-completed');
+  const totalEl = document.getElementById('progress-total');
+  const badgeEl = document.getElementById('progress-badge');
+  const fillEl = document.getElementById('progress-fill');
+
+  // Inject updated metrics and set the progress bar width fluidly
+  if (completedEl) completedEl.textContent = completed;
+  if (totalEl) totalEl.textContent = total;
+  if (badgeEl) badgeEl.textContent = `(${percentage}%)`;
+  if (fillEl) fillEl.style.width = `${percentage}%`;
+}
+
 
 /**
  * Initializes IntersectionObserver to reveal elements when they enter the viewport
@@ -311,6 +341,9 @@ function initRequirementDownloads() {
     });
   });
 }
+
+
+
 
 /**
  * FIXED: Missing function to generate and download mock PDF vectors for requirements
