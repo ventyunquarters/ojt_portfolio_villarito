@@ -702,25 +702,21 @@ function openWeeklyReportPDFPreview(weekNum) {
     const categoryEl = document.getElementById('modal-doc-category');
     const openLink = document.getElementById('modal-open-link');
 
-    // 1. Construct the path using standard encoding
-    // We use the '#' character directly because encodeURIComponent will handle it 
-    // inside the Google viewer URL, preventing the "404" fragmentation issue.
-    const filename = `VILLARITO_Week#${weekNum}_Report.pdf`;
+    // 1. Clean up the filename: remove the '#' to prevent URL fragmentation
+    // Rename your actual file from "VILLARITO_Week#2_Report.pdf" to "VILLARITO_Week_2_Report.pdf"
+    const filename = `VILLARITO_Week_${weekNum}_Report.pdf`;
+    
+    // 2. Use a clean path
     const pdfPath = `pdf/weekly report/${filename}`;
-    const absoluteUrl = `${window.location.origin}/${pdfPath}`;
 
     if (modal && frame) {
-        // 2. Use the Google Docs Viewer with a properly encoded absolute URL.
-        // The encodeURIComponent(absoluteUrl) is the critical part here—it tells 
-        // Google exactly where to find your specific file on your Vercel site.
-        frame.src = `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+        // 3. Set the src directly. Browsers on mobile will now treat this 
+        // as an embedded document rather than an external trigger.
+        frame.src = pdfPath;
         
-        // Update modal UI elements
         if (titleEl) titleEl.textContent = `Week ${weekNum} Progress Report`;
         if (categoryEl) categoryEl.textContent = "Weekly Progress Reports";
-        
-        // 3. Ensure the "Open in New Tab" link also uses the clean, encoded URL
-        openLink.href = pdfPath;
+        if (openLink) openLink.href = pdfPath;
 
         modal.classList.add('active');
     }
