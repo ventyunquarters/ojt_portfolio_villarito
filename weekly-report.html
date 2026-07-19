@@ -56,142 +56,95 @@
         developed.
       </p>
 
-      <div class="report-grid">
+<div class="report-grid">
 
-        <!-- Week 1 -->
-        <div class="report-card reveal reveal-delay-1" onclick="openWeeklyReportPreview(1, 'July 8 - July 10, 2026')">
-          <div class="report-icon-container">
-            <div class="css-cardboard-box">
-              <div class="box-lid">
-                <div class="lid-top"></div>
-                <div class="lid-front"></div>
-                <div class="lid-side"></div>
-              </div>
-              <div class="box-body">
-                <div class="body-front">
-                  <div class="body-handle"></div>
-                </div>
-                <div class="body-side"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="report-week">WEEK 1</h3>
-          <p class="report-date">(July 8 - July 10)</p>
-          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
-        </div>
+  <div class="report-grid">
 
-        <!-- Week 2 -->
-        <div class="report-card reveal reveal-delay-2" onclick="openWeeklyReportPreview(2, 'July 14 - July 17, 2026')">
-          <div class="report-icon-container">
-            <div class="css-cardboard-box">
-              <div class="box-lid">
-                <div class="lid-top"></div>
-                <div class="lid-front"></div>
-                <div class="lid-side"></div>
-              </div>
-              <div class="box-body">
-                <div class="body-front">
-                  <div class="body-handle"></div>
-                </div>
-                <div class="body-side"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="report-week">WEEK 2</h3>
-          <p class="report-date">(July 14 - July 17)</p>
-          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
-        </div>
+  <!-- Week 1 (Uploaded) -->
+  <div class="report-card reveal reveal-delay-1" onclick="openWeeklyReportPreview(1, 'July 8 - July 10, 2026')">
+    <span class="report-status-badge uploaded">Uploaded</span>
+    <div class="report-icon-container">
+      <div class="css-cardboard-box">
+        <div class="box-lid"><div class="lid-top"></div><div class="lid-front"></div><div class="lid-side"></div></div>
+        <div class="box-body"><div class="body-front"><div class="body-handle"></div></div><div class="body-side"></div></div>
+      </div>
+    </div>
+    <h3 class="report-week">WEEK 1</h3>
+    <p class="report-date">(July 8 - July 10)</p>
+    <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+  </div>
 
-        <!-- Week 3 -->
-        <div class="report-card reveal reveal-delay-3" onclick="openWeeklyReportPreview(3, 'July 21 - July 24, 2026')">
-          <div class="report-icon-container">
-            <div class="css-cardboard-box">
-              <div class="box-lid">
-                <div class="lid-top"></div>
-                <div class="lid-front"></div>
-                <div class="lid-side"></div>
-              </div>
-              <div class="box-body">
-                <div class="body-front">
-                  <div class="body-handle"></div>
-                </div>
-                <div class="body-side"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="report-week">WEEK 3</h3>
-          <p class="report-date">(July 21 - July 24)</p>
-          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
-        </div>
+  <!-- Week 2 (Uploaded) -->
+  <div class="report-card reveal reveal-delay-2" onclick="openWeeklyReportPreview(2, 'July 14 - July 17, 2026')">
+    <span class="report-status-badge uploaded">Uploaded</span>
+    <div class="report-icon-container">
+      <div class="css-cardboard-box">
+        <div class="box-lid"><div class="lid-top"></div><div class="lid-front"></div><div class="lid-side"></div></div>
+        <div class="box-body"><div class="body-front"><div class="body-handle"></div></div><div class="body-side"></div></div>
+      </div>
+    </div>
+    <h3 class="report-week">WEEK 2</h3>
+    <p class="report-date">(July 14 - July 17)</p>
+    <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
+  </div>
 
-        <!-- Week 4 -->
-        <div class="report-card reveal reveal-delay-1" onclick="openWeeklyReportPreview(4, 'July 29 - Aug 04, 2026')">
-          <div class="report-icon-container">
-            <div class="css-cardboard-box">
-              <div class="box-lid">
-                <div class="lid-top"></div>
-                <div class="lid-front"></div>
-                <div class="lid-side"></div>
-              </div>
-              <div class="box-body">
-                <div class="body-front">
-                  <div class="body-handle"></div>
-                </div>
-                <div class="body-side"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="report-week">WEEK 4</h3>
-          <p class="report-date">(July 29 - August 4)</p>
-          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
-        </div>
+  <!-- Week 3 (Ongoing / Disabled) -->
+  <div class="report-card disabled-card reveal reveal-delay-3">
+    <span class="report-status-badge ongoing">Ongoing</span>
+    <div class="report-icon-container">
+      <div class="css-cardboard-box">
+        <div class="box-lid"><div class="lid-top"></div><div class="lid-front"></div><div class="lid-side"></div></div>
+        <div class="box-body"><div class="body-front"><div class="body-handle"></div></div><div class="body-side"></div></div>
+      </div>
+    </div>
+    <h3 class="report-week">WEEK 3</h3>
+    <p class="report-date">(July 21 - July 24)</p>
+    <span style="font-size: 0.8rem; color: #6c757d; font-weight: 600;">In Progress</span>
+  </div>
 
-        <!-- Week 5 -->
-        <div class="report-card reveal reveal-delay-2" onclick="openWeeklyReportPreview(5, 'Aug 05 - Aug 11, 2026')">
-          <div class="report-icon-container">
-            <div class="css-cardboard-box">
-              <div class="box-lid">
-                <div class="lid-top"></div>
-                <div class="lid-front"></div>
-                <div class="lid-side"></div>
-              </div>
-              <div class="box-body">
-                <div class="body-front">
-                  <div class="body-handle"></div>
-                </div>
-                <div class="body-side"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="report-week">WEEK 5</h3>
-          <p class="report-date">(August 5 - August 11)</p>
-          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
-        </div>
+  <!-- Week 4 (Ongoing / Disabled) -->
+  <div class="report-card disabled-card reveal reveal-delay-1">
+    <span class="report-status-badge ongoing">Ongoing</span>
+    <div class="report-icon-container">
+      <div class="css-cardboard-box">
+        <div class="box-lid"><div class="lid-top"></div><div class="lid-front"></div><div class="lid-side"></div></div>
+        <div class="box-body"><div class="body-front"><div class="body-handle"></div></div><div class="body-side"></div></div>
+      </div>
+    </div>
+    <h3 class="report-week">WEEK 4</h3>
+    <p class="report-date">(July 29 - August 4)</p>
+    <span style="font-size: 0.8rem; color: #6c757d; font-weight: 600;">In Progress</span>
+  </div>
 
-        <!-- Week 6 -->
-        <div class="report-card reveal reveal-delay-3" onclick="openWeeklyReportPreview(6, 'Aug 12 - Aug 18, 2026')">
-          <div class="report-icon-container">
-            <div class="css-cardboard-box">
-              <div class="box-lid">
-                <div class="lid-top"></div>
-                <div class="lid-front"></div>
-                <div class="lid-side"></div>
-              </div>
-              <div class="box-body">
-                <div class="body-front">
-                  <div class="body-handle"></div>
-                </div>
-                <div class="body-side"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="report-week">WEEK 6</h3>
-          <p class="report-date">(August 12 - August 18)</p>
-          <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600;">View & Download</span>
-        </div>
+  <!-- Week 5 (Ongoing / Disabled) -->
+  <div class="report-card disabled-card reveal reveal-delay-2">
+    <span class="report-status-badge ongoing">Ongoing</span>
+    <div class="report-icon-container">
+      <div class="css-cardboard-box">
+        <div class="box-lid"><div class="lid-top"></div><div class="lid-front"></div><div class="lid-side"></div></div>
+        <div class="box-body"><div class="body-front"><div class="body-handle"></div></div><div class="body-side"></div></div>
+      </div>
+    </div>
+    <h3 class="report-week">WEEK 5</h3>
+    <p class="report-date">(August 5 - August 11)</p>
+    <span style="font-size: 0.8rem; color: #6c757d; font-weight: 600;">In Progress</span>
+  </div>
 
+  <!-- Week 6 (Ongoing / Disabled) -->
+  <div class="report-card disabled-card reveal reveal-delay-3">
+    <span class="report-status-badge ongoing">Ongoing</span>
+    <div class="report-icon-container">
+      <div class="css-cardboard-box">
+        <div class="box-lid"><div class="lid-top"></div><div class="lid-front"></div><div class="lid-side"></div></div>
+        <div class="box-body"><div class="body-front"><div class="body-handle"></div></div><div class="body-side"></div></div>
+      </div>
+    </div>
+    <h3 class="report-week">WEEK 6</h3>
+    <p class="report-date">(August 12 - August 18)</p>
+    <span style="font-size: 0.8rem; color: #6c757d; font-weight: 600;">In Progress</span>
+  </div>
 
-
+</div>
       </div>
     </section>
 
@@ -271,6 +224,7 @@
 
     </div>
   </div>
+
 
   <!-- Global PDF Responsive Preview Modal Overlay -->
   <div class="pdf-modal-overlay" id="pdf-preview-modal">

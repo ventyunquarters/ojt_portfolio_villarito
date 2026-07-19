@@ -703,19 +703,19 @@ function openWeeklyReportPDFPreview(weekNum) {
     const categoryEl = document.getElementById('modal-doc-category');
     const openLink = document.getElementById('modal-open-link');
 
-    // Safe URL-encoded path for filenames containing specialized characters like '#'
-    const filePath = `pdf/weekly report/VILLARITO_Week%23${weekNum}_Report.pdf`;
+    // FIX: Encoded the '#' as %23 and ensured the space is handled as %20
+    const fileName = `VILLARITO_Week%23${weekNum}_Report.pdf`;
+    const pdfPath = `pdf/weekly report/${fileName}`;
 
     if (modal && frame) {
-        // Generate absolute path using your current web host domain origin
-        const absoluteUrl = `${window.location.origin}/${filePath}`;
-        
-        // Pass to the secure Google viewer engine
-        frame.src = `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+        // Now it will correctly find the file
+        frame.src = pdfPath;
         
         if (titleEl) titleEl.textContent = `Week ${weekNum} Progress Report`;
         if (categoryEl) categoryEl.textContent = "Weekly Progress Reports";
-        if (openLink) openLink.href = filePath;
+        
+        // Corrected variable name to pdfPath
+        if (openLink) openLink.href = pdfPath;
 
         modal.classList.add('active');
     }
