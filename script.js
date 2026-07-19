@@ -444,53 +444,56 @@ const filePath = `pdf/weekly-report/VILLARITO_Week_${weekNum}_Report.pdf`;
     link.remove();
 }
 
-/**
- * Opens the modern modal viewer with safe fallback notice management
- */
 function openDocumentPreview(docName, categoryName = "Before On-the-Job Training") {
+
     const cleanName = docName.trim().toLowerCase();
-    
+
     const fileMapping = {
-        'medical certificate': 'pdf/weekly-report/VILLARITO_medical_certificate.pdf',
-        'insurance': 'pdf/weekly-report/VILLARITO_OJT_Insurance.pdf',
-        'cv': 'pdf/weekly-report/VILLARITO_AIRA_CV.pdf',
-        'resume': 'pdf/weekly-report/VILLARITO_AIRA_CV.pdf',
-        'letter of endorsement': 'pdf/weekly-report/VILLARITO_Letter_Of_Endorsement.pdf',
-        'endorsement letter': 'pdf/weekly-report/VILLARITO_Letter_Of_Endorsement.pdf',
-        'letter of intent': 'pdf/weekly-report/VILLARITO_Letter_Of_Intent.pdf',
-        'weekly report 1': 'pdf/weekly-report/VILLARITO_Week#1_Report.pdf',
-        'weekly report 2': 'pdf/weekly-report/VILLARITO_Week#2_Report.pdf',
-        'weekly report 3': 'pdf/weekly-report/VILLARITO_Week#3_Report.pdf'
+        "medical certificate": "VILLARITO_medical_certificate.pdf",
+        "insurance": "VILLARITO_OJT_Insurance.pdf",
+        "cv": "VILLARITO_AIRA_CV.pdf",
+        "resume": "VILLARITO_AIRA_CV.pdf",
+        "letter of endorsement": "VILLARITO_Letter_Of_Endorsement.pdf",
+        "endorsement letter": "VILLARITO_Letter_Of_Endorsement.pdf",
+        "letter of intent": "VILLARITO_Letter_Of_Intent.pdf",
+
+        "weekly report 1": "VILLARITO_Week_1_Report.pdf",
+        "weekly report 2": "VILLARITO_Week_2_Report.pdf",
+        "weekly report 3": "VILLARITO_Week_3_Report.pdf"
     };
 
-    const filePath = fileMapping[cleanName];
+    const filename = fileMapping[cleanName];
 
-    if (!filePath) {
-        showNotification(`Preview unavailable for "${docName}". Mock download fallback active.`, 'error');
+    if (!filename) {
+        showNotification("Document not found.", "error");
         return;
     }
 
-    const modal = document.getElementById('pdf-preview-modal');
-    const frame = document.getElementById('pdf-preview-frame');
-    const titleEl = document.getElementById('modal-doc-title');
-    const categoryEl = document.getElementById('modal-doc-category');
-    const openLink = document.getElementById('modal-open-link');
+    const modal = document.getElementById("pdf-preview-modal");
+    const frame = document.getElementById("pdf-preview-frame");
+    const titleEl = document.getElementById("modal-doc-title");
+    const categoryEl = document.getElementById("modal-doc-category");
+    const openLink = document.getElementById("modal-open-link");
 
-    if (modal && frame) {
-        // Convert the relative path into a fully qualified absolute URL for Google's servers
-        const absoluteUrl = `${window.location.origin}/${filePath}`;
-        
-        // Wrap your URL in the Google Docs embedded viewer structure
-        frame.src = `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
-        
-        if (titleEl) titleEl.textContent = docName;
-        if (categoryEl) categoryEl.textContent = categoryName;
-        if (openLink) openLink.href = filePath; // Keep the original file path for direct download button clicks
+    const pdfUrl = `${window.location.origin}/pdf/weekly-report/${encodeURIComponent(filename)}`;
 
-        modal.classList.add('active');
-    }
+    // Google Docs Viewer URL
+    const googleViewer =
+        `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(pdfUrl)}`;
+
+    if (titleEl) titleEl.textContent = docName;
+    if (categoryEl) categoryEl.textContent = categoryName;
+    if (openLink) openLink.href = pdfUrl;
+
+    frame.src = "";
+    frame.onload = null;
+    frame.onerror = null;
+
+    // Load through Google Viewer
+    frame.src = googleViewer;
+
+    modal.classList.add("active");
 }
-
 /**
  * Closes the document preview modal and terminates background iframe loading
  */
