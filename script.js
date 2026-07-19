@@ -702,31 +702,21 @@ function openWeeklyReportPDFPreview(weekNum) {
 
     const filename = `VILLARITO_Week_${weekNum}_Report.pdf`;
 
-    // Folder should be renamed to weekly-report
-    const pdfPath = `pdf/weekly-report/${encodeURIComponent(filename)}`;
+    const pdfPath = `/pdf/weekly-report/${filename}`;
 
-    const absolutePdf =
-        `${window.location.origin}/${pdfPath}`;
+    const absoluteUrl = window.location.origin + pdfPath;
 
-    if(titleEl)
+    if (titleEl)
         titleEl.textContent = `Week ${weekNum} Progress Report`;
 
-    if(categoryEl)
+    if (categoryEl)
         categoryEl.textContent = "Weekly Progress Reports";
 
-    if(openLink)
-        openLink.href = absolutePdf;
+    if (openLink)
+        openLink.href = absoluteUrl;
 
-    const isMessenger =
-        navigator.userAgent.includes("FBAN") ||
-        navigator.userAgent.includes("FBAV");
-
-    if(isMessenger){
-        window.open(absolutePdf, "_blank");
-        return;
-    }
-
-    frame.src = absolutePdf;
+    frame.src =
+        `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(absoluteUrl)}`;
 
     modal.classList.add("active");
 }
