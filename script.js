@@ -692,32 +692,41 @@ function setupMobileNavbar() {
     });
   });
 }
-/**
- * Opens the main PDF modal preview for the selected weekly report
- */
 function openWeeklyReportPDFPreview(weekNum) {
-    const modal = document.getElementById('pdf-preview-modal');
-    const frame = document.getElementById('pdf-preview-frame');
-    const titleEl = document.getElementById('modal-doc-title');
-    const categoryEl = document.getElementById('modal-doc-category');
-    const openLink = document.getElementById('modal-open-link');
 
-    // 1. Clean up the filename: remove the '#' to prevent URL fragmentation
-    // Rename your actual file from "VILLARITO_Week#2_Report.pdf" to "VILLARITO_Week_2_Report.pdf"
+    const modal = document.getElementById("pdf-preview-modal");
+    const frame = document.getElementById("pdf-preview-frame");
+    const titleEl = document.getElementById("modal-doc-title");
+    const categoryEl = document.getElementById("modal-doc-category");
+    const openLink = document.getElementById("modal-open-link");
+
     const filename = `VILLARITO_Week_${weekNum}_Report.pdf`;
-    
-    // 2. Use a clean path
-    const pdfPath = `pdf/weekly report/${filename}`;
 
-    if (modal && frame) {
-        // 3. Set the src directly. Browsers on mobile will now treat this 
-        // as an embedded document rather than an external trigger.
-        frame.src = pdfPath;
-        
-        if (titleEl) titleEl.textContent = `Week ${weekNum} Progress Report`;
-        if (categoryEl) categoryEl.textContent = "Weekly Progress Reports";
-        if (openLink) openLink.href = pdfPath;
+    // Folder should be renamed to weekly-report
+    const pdfPath = `pdf/weekly-report/${encodeURIComponent(filename)}`;
 
-        modal.classList.add('active');
+    const absolutePdf =
+        `${window.location.origin}/${pdfPath}`;
+
+    if(titleEl)
+        titleEl.textContent = `Week ${weekNum} Progress Report`;
+
+    if(categoryEl)
+        categoryEl.textContent = "Weekly Progress Reports";
+
+    if(openLink)
+        openLink.href = absolutePdf;
+
+    const isMessenger =
+        navigator.userAgent.includes("FBAN") ||
+        navigator.userAgent.includes("FBAV");
+
+    if(isMessenger){
+        window.open(absolutePdf, "_blank");
+        return;
     }
+
+    frame.src = absolutePdf;
+
+    modal.classList.add("active");
 }
