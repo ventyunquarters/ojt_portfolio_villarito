@@ -435,7 +435,7 @@ function showNotification(message, type = 'success') {
  * Helper: Triggers PDF File Download
  */
 function downloadWeeklyReportPDF(weekNum) {
-const filePath = `pdf/weekly report/VILLARITO_Week_${weekNum}_Report.pdf`;
+const filePath = `pdf/weekly-report/VILLARITO_Week_${weekNum}_Report.pdf`;
     const link = document.createElement('a');
     link.href = filePath;
     link.download = `VILLARITO_Week_${weekNum}_Report.pdf`;
@@ -451,16 +451,16 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
     const cleanName = docName.trim().toLowerCase();
     
     const fileMapping = {
-        'medical certificate': 'pdf/weekly report/VILLARITO_medical_certificate.pdf',
-        'insurance': 'pdf/weekly report/VILLARITO_OJT_Insurance.pdf',
-        'cv': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
-        'resume': 'pdf/weekly report/VILLARITO_AIRA_CV.pdf',
-        'letter of endorsement': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
-        'endorsement letter': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
-        'letter of intent': 'pdf/weekly report/VILLARITO_Letter_Of_Intent.pdf',
-        'weekly report 1': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf',
-        'weekly report 2': 'pdf/weekly report/VILLARITO_Week#2_Report.pdf',
-        'weekly report 3': 'pdf/weekly report/VILLARITO_Week#3_Report.pdf'
+        'medical certificate': 'pdf/weekly-report/VILLARITO_medical_certificate.pdf',
+        'insurance': 'pdf/weekly-report/VILLARITO_OJT_Insurance.pdf',
+        'cv': 'pdf/weekly-report/VILLARITO_AIRA_CV.pdf',
+        'resume': 'pdf/weekly-report/VILLARITO_AIRA_CV.pdf',
+        'letter of endorsement': 'pdf/weekly-report/VILLARITO_Letter_Of_Endorsement.pdf',
+        'endorsement letter': 'pdf/weekly-report/VILLARITO_Letter_Of_Endorsement.pdf',
+        'letter of intent': 'pdf/weekly-report/VILLARITO_Letter_Of_Intent.pdf',
+        'weekly report 1': 'pdf/weekly-report/VILLARITO_Week#1_Report.pdf',
+        'weekly report 2': 'pdf/weekly-report/VILLARITO_Week#2_Report.pdf',
+        'weekly report 3': 'pdf/weekly-report/VILLARITO_Week#3_Report.pdf'
     };
 
     const filePath = fileMapping[cleanName];
