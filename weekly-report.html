@@ -256,18 +256,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Folder Front Flap -->
-          <div class="folder-front"></div>
-
-          <!-- Hover Overlay Guide -->
-          <div class="folder-hover-overlay">
-            <svg viewBox="0 0 24 24" class="download-icon">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span>DOWNLOAD REPORT</span>
-          </div>
         </div>
       </div>
 
@@ -281,6 +269,37 @@
       </div>
       <div class="box-body-side"></div>
 
+    </div>
+  </div>
+
+  <!-- Global PDF Responsive Preview Modal Overlay -->
+  <div class="pdf-modal-overlay" id="pdf-preview-modal">
+    <div class="pdf-modal-container">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title-group">
+          <div class="pdf-modal-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h3 id="modal-doc-title">Weekly Report Document</h3>
+            <p id="modal-doc-category">Weekly Progress Reports</p>
+          </div>
+        </div>
+        <button class="pdf-modal-close-btn" onclick="closePreview()" aria-label="Close Preview">&times;</button>
+      </div>
+      <div class="pdf-modal-body">
+        <iframe id="pdf-preview-frame" src="" frameborder="0"></iframe>
+      </div>
+      <div class="pdf-modal-footer">
+        <span class="pdf-status-pill">Verified Log Sheet</span>
+        <a id="modal-open-link" href="#" target="_blank" class="pdf-open-tab-btn">Open in New Tab</a>
+      </div>
     </div>
   </div>
 

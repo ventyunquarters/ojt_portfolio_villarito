@@ -435,10 +435,10 @@ function showNotification(message, type = 'success') {
  * Helper: Triggers PDF File Download
  */
 function downloadWeeklyReportPDF(weekNum) {
-    const filePath = `pdf/weekly report/VILLARITO_Week#${weekNum}_Report.pdf`;
+const filePath = `pdf/weekly report/VILLARITO_Week_${weekNum}_Report.pdf`;
     const link = document.createElement('a');
     link.href = filePath;
-    link.download = `VILLARITO_Week#${weekNum}_Report.pdf`;
+    link.download = `VILLARITO_Week_${weekNum}_Report.pdf`;
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -530,12 +530,21 @@ function initWeeklyReportPreview() {
             currentPreviewDateRange = null;
         }
     });
-
-    // Trigger PDF download when the folder is clicked
+// Trigger the folder animation first, then open the PDF preview
     folderWrapper.addEventListener('click', () => {
         if (currentPreviewWeekNum) {
-            showNotification(`Downloading Week ${currentPreviewWeekNum} Report PDF...`, 'success');
-            downloadWeeklyReportPDF(currentPreviewWeekNum);
+            // 1. Add the class that triggers your folder's opening CSS animation
+            folderWrapper.classList.add('open'); 
+
+            // 2. Let the animation play out (400ms) before opening the preview modal
+            setTimeout(() => {
+                // Open the main PDF preview modal
+                openWeeklyReportPDFPreview(currentPreviewWeekNum);
+                
+                // Clean up: hide the intermediate overlay and reset the folder state for next time
+                overlay.classList.remove('visible');
+                folderWrapper.classList.remove('open');
+            }, 400); // Match this duration (400ms) to your CSS folder transition time
         }
     });
 }
@@ -676,4 +685,27 @@ function setupMobileNavbar() {
       navLinks.classList.remove('open');
     });
   });
+}
+
+/**
+ * Opens the main PDF modal preview for the selected weekly report
+ */
+function openWeeklyReportPDFPreview(weekNum) {
+    const modal = document.getElementById('pdf-preview-modal');
+    const frame = document.getElementById('pdf-preview-frame');
+    const titleEl = document.getElementById('modal-doc-title');
+    const categoryEl = document.getElementById('modal-doc-category');
+    const openLink = document.getElementById('modal-open-link');
+
+    // FIX: Changed '#' to '%23' so the browser loads the full filename
+    const filePath = `pdf/weekly report/VILLARITO_Week%23${weekNum}_Report.pdf`;
+
+    if (modal && frame) {
+        frame.src = filePath;
+        if (titleEl) titleEl.textContent = `Week ${weekNum} Progress Report`;
+        if (categoryEl) categoryEl.textContent = "Weekly Progress Reports";
+        if (openLink) openLink.href = filePath;
+
+        modal.classList.add('active');
+    }
 }

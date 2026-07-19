@@ -1849,6 +1849,36 @@ footer {
   }
 }
 
+/* The main container for the file or folder card */
+.file-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* The initial hidden state of the overlay with your red background theme */
+.file-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(220, 38, 38, 0.9); /* Animated red background style */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(100%); /* Creates a slide-up effect; can switch to scale() or omit for a simple fade */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* The trigger that activates the animation when the file card is hovered */
+.file-card:hover .file-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Card 3D CSS Cardboard Box */
 .css-cardboard-box {
   position: relative;
@@ -2250,4 +2280,233 @@ button.req-action-btn-preview:hover {
 
 .pdf-modal-close-btn:hover {
   background-color: rgba(0, 0, 0, 0.05); /* Light circle background on hover */
+}
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS EXTENSIONS: PDF PREVIEW MODAL
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .pdf-modal-container {
+    max-width: 95%;
+    height: 82vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .pdf-modal-overlay {
+    padding: 12px;
+  }
+
+  .pdf-modal-container {
+    max-width: 100%;
+    height: 92vh;
+    border-radius: 12px;
+  }
+
+  .pdf-modal-header {
+    padding: 12px 16px;
+  }
+
+  .pdf-modal-title-group {
+    gap: 8px;
+  }
+
+  .pdf-modal-icon-box {
+    padding: 6px;
+  }
+
+  .pdf-modal-title-group h3 {
+    font-size: 1rem;
+  }
+
+  .pdf-modal-title-group p {
+    font-size: 0.75rem;
+  }
+
+  .pdf-modal-footer {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pdf-open-tab-btn {
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    background-color: rgba(122, 0, 22, 0.04);
+    border-radius: 6px;
+  }
+}
+
+/* 1. The document container must be relative so the overlay maps to its boundaries */
+.document-sheet {
+    position: relative;
+    border-radius: 8px; /* Matches the rounded corners of your document */
+    overflow: hidden;   /* Keeps the overlay strictly inside the document bounds */
+    cursor: pointer;
+}
+
+/* 2. The overlay covers the sheet entirely, hidden by default */
+.file-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 0, 0, 0.9); /* Deep red theme matching the PUP colors */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Smooth transition states */
+    opacity: 0;
+    pointer-events: none; /* Prevents the overlay from blocking hover triggers prematurely */
+    transition: opacity 0.3s ease;
+    z-index: 10; /* Ensures it sits on top of the text and tables */
+}
+
+/* 3. Text styling for the overlay message */
+.overlay-text {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* 4. The Trigger: When hovering the sheet, fade in the red overlay */
+.document-sheet:hover .file-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* Ensures the red block bounds itself to the paper sheet */
+#preview-document-sheet {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Hidden by default, absolute overlay covering the document */
+.file-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 0, 0, 0.95); /* Deep red background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 99; /* Higher than the sheet elements */
+}
+
+/* Styling for the text inside the overlay */
+.overlay-text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Trigger: Turns the sheet red and reveals text on hover */
+#preview-document-sheet:hover .file-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Document Card Base Container */
+#preview-document-sheet {
+  position: relative; /* Constrains the absolute-positioned overlay inside this box */
+  width: 100%;        /* Adjust to match your grid/layout dimensions */
+  max-width: 280px;
+  height: 350px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;   /* Keeps the overlay rounded corners cleanly clipped */
+  cursor: pointer;
+}
+
+/* Hidden Overlay Setup */
+.file-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65); /* Dark semi-transparent mask */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;                           /* Hidden by default */
+  transition: opacity 0.25s ease-in-out; /* Smooth fade effect */
+  z-index: 10;                          /* Sits on top of the text content */
+}
+
+/* Hover Action: Triggered from Parent Container */
+#preview-document-sheet:hover .file-overlay {
+  opacity: 1;
+}
+
+/* Text Inside Overlay */
+.overlay-text {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  border: 2px solid #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+/* Document Internal Styling */
+.mini-doc-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #800000; /* Maroon accent color */
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.mini-pup-logo {
+  font-weight: 800;
+  color: #800000;
+  font-size: 1.1rem;
+}
+
+.mini-doc-dept {
+  font-size: 0.7rem;
+  color: #4a5568;
+  font-weight: 600;
+  text-align: right;
+}
+
+.mini-doc-body {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-doc-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2d3748;
+  text-align: center;
 }
