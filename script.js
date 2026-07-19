@@ -459,7 +459,8 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
         'endorsement letter': 'pdf/weekly report/VILLARITO_Letter_Of_Endorsement.pdf',
         'letter of intent': 'pdf/weekly report/VILLARITO_Letter_Of_Intent.pdf',
         'weekly report 1': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf',
-        'week 1 report': 'pdf/weekly report/VILLARITO_Week#1_Report.pdf'
+        'weekly report 2': 'pdf/weekly report/VILLARITO_Week#2_Report.pdf',
+        'weekly report 3': 'pdf/weekly report/VILLARITO_Week#3_Report.pdf'
     };
 
     const filePath = fileMapping[cleanName];
@@ -476,10 +477,15 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
     const openLink = document.getElementById('modal-open-link');
 
     if (modal && frame) {
-        frame.src = filePath;
+        // Convert the relative path into a fully qualified absolute URL for Google's servers
+        const absoluteUrl = `${window.location.origin}/${filePath}`;
+        
+        // Wrap your URL in the Google Docs embedded viewer structure
+        frame.src = `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+        
         if (titleEl) titleEl.textContent = docName;
         if (categoryEl) categoryEl.textContent = categoryName;
-        if (openLink) openLink.href = filePath;
+        if (openLink) openLink.href = filePath; // Keep the original file path for direct download button clicks
 
         modal.classList.add('active');
     }
@@ -697,11 +703,16 @@ function openWeeklyReportPDFPreview(weekNum) {
     const categoryEl = document.getElementById('modal-doc-category');
     const openLink = document.getElementById('modal-open-link');
 
-    // FIX: Changed '#' to '%23' so the browser loads the full filename
+    // Safe URL-encoded path for filenames containing specialized characters like '#'
     const filePath = `pdf/weekly report/VILLARITO_Week%23${weekNum}_Report.pdf`;
 
     if (modal && frame) {
-        frame.src = filePath;
+        // Generate absolute path using your current web host domain origin
+        const absoluteUrl = `${window.location.origin}/${filePath}`;
+        
+        // Pass to the secure Google viewer engine
+        frame.src = `https://docs.google.com/gview?url=${encodeURIComponent(absoluteUrl)}&embedded=true`;
+        
         if (titleEl) titleEl.textContent = `Week ${weekNum} Progress Report`;
         if (categoryEl) categoryEl.textContent = "Weekly Progress Reports";
         if (openLink) openLink.href = filePath;
