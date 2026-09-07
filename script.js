@@ -465,6 +465,13 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
               "weekly report 3": "VILLARITO_Week_3_Report.pdf"
     };
 
+    const filename = fileMapping[cleanName];
+
+    if (!filename) {
+        showNotification("Document not found.", "error");
+        return;
+    }
+
     const modal = document.getElementById("pdf-preview-modal");
     const frame = document.getElementById("pdf-preview-frame");
     const titleEl = document.getElementById("modal-doc-title");
