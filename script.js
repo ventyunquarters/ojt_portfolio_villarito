@@ -448,7 +448,10 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
 
     const cleanName = docName.trim().toLowerCase();
 
-    const fileMapping = {
+const fileMapping = {
+        "student waiver": "VILLARITO_Student_Waiver.pdf",
+        "internship agreement": "Villarito_Internship_Agreement.pdf",
+        "consent form": "Villarito_Consent_Form.pdf",
         "medical certificate": "VILLARITO_medical_certificate.pdf",
         "insurance": "VILLARITO_OJT_Insurance.pdf",
         "cv": "VILLARITO_AIRA_CV.pdf",
@@ -461,13 +464,6 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
         "weekly report 2": "VILLARITO_Week_2_Report.pdf",
         "weekly report 3": "VILLARITO_Week_3_Report.pdf"
     };
-
-    const filename = fileMapping[cleanName];
-
-    if (!filename) {
-        showNotification("Document not found.", "error");
-        return;
-    }
 
     const modal = document.getElementById("pdf-preview-modal");
     const frame = document.getElementById("pdf-preview-frame");
