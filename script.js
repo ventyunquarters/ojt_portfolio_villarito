@@ -448,21 +448,21 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
 
     const cleanName = docName.trim().toLowerCase();
 
-const fileMapping = {
-        "student waiver": "VILLARITO_Student_Waiver.pdf",
-        "internship agreement": "Villarito_Internship_Agreement.pdf",
-        "consent form": "Villarito_Consent_Form.pdf",
-        "medical certificate": "VILLARITO_medical_certificate.pdf",
-        "insurance": "VILLARITO_OJT_Insurance.pdf",
-        "cv": "VILLARITO_AIRA_CV.pdf",
-        "resume": "VILLARITO_AIRA_CV.pdf",
-        "letter of endorsement": "VILLARITO_Letter_Of_Endorsement.pdf",
-        "endorsement letter": "VILLARITO_Letter_Of_Endorsement.pdf",
-        "letter of intent": "VILLARITO_Letter_Of_Intent.pdf",
+      const fileMapping = {
+              "student waiver": "VILLARITO_Student_Waiver.pdf",
+              "internship agreement": "Villarito_Internship_Agreement.pdf",
+              "consent form": "Villarito_Consent_Form.pdf",
+              "medical certificate": "VILLARITO_medical_certificate.pdf",
+              "insurance": "VILLARITO_OJT_Insurance.pdf",
+              "cv": "VILLARITO_AIRA_CV.pdf",
+              "resume": "VILLARITO_AIRA_CV.pdf",
+              "letter of endorsement": "VILLARITO_Letter_Of_Endorsement.pdf",
+              "endorsement letter": "VILLARITO_Letter_Of_Endorsement.pdf",
+              "letter of intent": "VILLARITO_Letter_Of_Intent.pdf",
 
-        "weekly report 1": "VILLARITO_Week_1_Report.pdf",
-        "weekly report 2": "VILLARITO_Week_2_Report.pdf",
-        "weekly report 3": "VILLARITO_Week_3_Report.pdf"
+              "weekly report 1": "VILLARITO_Week_1_Report.pdf",
+              "weekly report 2": "VILLARITO_Week_2_Report.pdf",
+              "weekly report 3": "VILLARITO_Week_3_Report.pdf"
     };
 
     const modal = document.getElementById("pdf-preview-modal");
