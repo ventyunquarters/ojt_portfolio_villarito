@@ -96,63 +96,82 @@
       </div>
     </section>
 
-<!-- OJT Progress Card -->
-<div class="progress-card-container" id="ojt-progress-card" data-completed="240" data-total="240">
-  <div class="progress-card-meta">
-    <span class="progress-card-status">Completed Hours</span>
-    <span class="progress-card-metrics">
-      <strong id="progress-completed">240</strong> / <span id="progress-total">240</span> Hours 
-      <span class="percent-badge" id="progress-badge">(100%)</span>
-    </span>
-  </div>
+    <!-- OJT Progress Card -->
+    <div class="progress-card-container" id="ojt-progress-card" data-completed="240" data-total="240">
+      <div class="progress-card-meta">
+        <span class="progress-card-status">Completed Hours</span>
+        <span class="progress-card-metrics">
+          <strong id="progress-completed">240</strong> / <span id="progress-total">240</span> Hours 
+          <span class="percent-badge" id="progress-badge">(100%)</span>
+        </span>
+      </div>
 
-  <div class="progress-card-track">
-    <!-- The width will be managed dynamically by JavaScript, fallback preset here -->
-    <div class="progress-card-fill" id="progress-fill" style="width: 100%;"></div>
-  </div>
-</div>
+      <div class="progress-card-track">
+        <div class="progress-card-fill" id="progress-fill" style="width: 100%;"></div>
+      </div>
+    </div>
 
     <!-- Company Profile Section -->
     <section class="reveal reveal-delay-1" id="company-section">
       <h2 class="section-title">Company Profile</h2>
       <div class="company-container">
 
-        <!-- Company Profile Image Placeholder -->
-        <div class="pdf-placeholder-card" id="company-profile-pdf">
-          <div class="pdf-header-bar">
-            <span class="pdf-icon-badge">PDF</span>
-            <div class="pdf-dots">
-              <div class="pdf-dot"></div>
-              <div class="pdf-dot"></div>
-              <div class="pdf-dot"></div>
+        <!-- Company Profile Content Card Layout -->
+        <div class="pdf-placeholder-card" id="company-profile-pdf" style="width: 100%; max-width: 900px; height: auto; border-radius: 16px; padding: 2.5rem; text-align: left; cursor: default;">
+          
+          <div style="display: flex; flex-direction: column; gap: 1.5rem; color: #2a2a2a;">
+            
+            <!-- Company Logo Header replacing the red text -->
+            <div style="margin-bottom: 0.2rem;">
+              <img src="assets/sysu_logo.png" alt="Sysu International, Inc. Logo" style="max-height: 55px; width: auto; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <h3 style="display: none; font-size: 1.6rem; color: #8b0000; font-weight: 800; margin: 0;">Sysu International, Inc.</h3>
             </div>
+
+            <div>
+              <p style="font-size: 1.05rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                <strong>About:</strong> Sysu International, Inc. is the Philippines' leading importer, marketer, and exclusive distributor of premium food and consumer brands, bridging world-class global flavors with the Filipino household.
+              </p>
+            </div>
+
+            <div>
+              <h4 style="font-size: 1.05rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem;">Address</h4>
+              <p style="font-size: 1rem; color: #4a4a4a; margin: 0;">Sysu Centre, 145 Panay Avenue, cor. Sgt. Esguerra St., Quezon City, Metro Manila, Philippines</p>
+            </div>
+
+            <div>
+              <h4 style="font-size: 1.05rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem;">Contact Information</h4>
+              <p style="font-size: 1rem; color: #4a4a4a; margin: 0;">
+                Tel No: (02) 8920 5291<br>
+                Website: https://www.sysuinc.com.ph
+              </p>
+            </div>
+
+            <div>
+              <h4 style="font-size: 1.05rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem;">Mission</h4>
+              <p style="font-size: 1.05rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                We exist to dynamically pursue exceptional and innovative products and solutions in order to continually satisfy our internal and external customers
+              </p>
+            </div>
+
+            <div>
+              <h4 style="font-size: 1.05rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem;">Vision</h4>
+              <p style="font-size: 1.05rem; line-height: 1.7; color: #4a4a4a; margin: 0;">
+                Be the top-of-mind source of quality products that enhances our customer’s lifestyle
+              </p>
+            </div>
+
+            <div>
+              <h4 style="font-size: 1.05rem; color: #8b0000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Core Portfolio & Capabilities</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 1rem; color: #4a4a4a;">
+                <li><strong>House Brands & Manufacturing:</strong> Production and nationwide distribution of Clara Olé sauces, marinades, jams, and dips.</li>
+                <li><strong>Exclusive Brand Distribution:</strong> Importer of global brands including Lee Kum Kee, San Remo, La Española, Tree Top, Smucker’s, Jif, and TABASCO.</li>
+                <li><strong>Food Service Solutions:</strong> Bulk supplies, custom packaging, and toll-packing services for hotels, restaurants, and institutional partners.</li>
+                <li><strong>Nationwide Logistics:</strong> Advanced warehousing and cold-chain supply chain management reaching major hypermarkets and clubs.</li>
+              </ul>
+            </div>
+
           </div>
 
-          <div class="pdf-content-preview">
-            <h3 class="pdf-preview-title">Company Profile</h3>
-            <div class="pdf-skeleton-lines">
-              <div class="skeleton-line"></div>
-              <div class="skeleton-line medium"></div>
-              <div class="skeleton-line short"></div>
-            </div>
-
-            <div class="pdf-preview-graphic">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
-                <line x1="7" y1="2" x2="7" y2="22"></line>
-                <line x1="17" y1="2" x2="17" y2="22"></line>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <line x1="2" y1="7" x2="7" y2="7"></line>
-                <line x1="2" y1="17" x2="7" y2="17"></line>
-                <line x1="17" y1="17" x2="22" y2="17"></line>
-                <line x1="17" y1="7" x2="22" y2="7"></line>
-              </svg>
-            </div>
-
-            <div class="pdf-skeleton-lines">
-              <div class="skeleton-line medium" style="margin: 0 auto;"></div>
-            </div>
-          </div>
         </div>
 
       </div>
