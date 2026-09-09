@@ -98,69 +98,8 @@ function initCertificateDownload() {
   });
 }
 
-function downloadCertificatePlaceholderPDF() {
-  const content = `%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
-endobj
-4 0 obj
-<< /Length 130 >>
-stream
-BT
-/F1 18 Tf
-50 700 Td
-(Aira E. Villarito - OJT Completion Record) Tj
-/F1 12 Tf
-0 -40 Td
-(Document: Certificate of Completion Placeholder) Tj
-0 -20 Td
-(This is a verified placeholder document for the Certificate.) Tj
-0 -20 Td
-(Clicking the download button successfully downloads this mockup file.) Tj
-ET
-endstream
-endobj
-5 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
-endobj
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000062 00000 n 
-0000000120 00000 n 
-0000000250 00000 n 
-0000000424 00000 n 
-trailer
-<< /Size 6 /Root 1 0 R >>
-startxref
-495
-%%EOF`;
-
-  const bytes = new Uint8Array(content.length);
-  for (let i = 0; i < content.length; i++) {
-    bytes[i] = content.charCodeAt(i);
-  }
-
-  const blob = new Blob([bytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'Aira_Villarito_OJT_Certificate_Placeholder.pdf';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
-
 /**
- * Sets up PDF download interaction for the Evaluation placeholder cards
+ * Sets up PDF View interaction for the Evaluation cards using the real files
  */
 function initEvaluationDownloads() {
   const traineePdf = document.getElementById('trainee-eval-pdf');
@@ -169,94 +108,50 @@ function initEvaluationDownloads() {
   if (traineePdf) {
     traineePdf.addEventListener('click', (e) => {
       e.preventDefault();
-      triggerEvaluationDownload('Trainee Evaluation', 'Aira_Villarito_Trainee_Evaluation.pdf');
+      // Points to your real Trainee Evaluation file
+      openEvaluationPreview('Trainee Evaluation', 'VILLARITO_Eval_Instrument_Student.pdf');
     });
   }
 
   if (performancePdf) {
     performancePdf.addEventListener('click', (e) => {
       e.preventDefault();
-      triggerEvaluationDownload('Performance Evaluation', 'Aira_Villarito_Performance_Evaluation.pdf');
+      // Points to your real Performance Evaluation file
+      openEvaluationPreview('Performance Evaluation', 'VILLARITO_OJT_Performance_Eval.pdf');
     });
   }
 }
 
-function triggerEvaluationDownload(label, fileName) {
-  showNotification(`Preparing ${label} PDF...`, 'info');
+/**
+ * Opens the Modal and loads the real PDF via Google Docs Viewer
+ */
+function openEvaluationPreview(label, fileName) {
+  const modal = document.getElementById("pdf-preview-modal");
+  const frame = document.getElementById("pdf-preview-frame");
+  const titleEl = document.getElementById("modal-doc-title");
+  const categoryEl = document.getElementById("modal-doc-category");
+  const openLink = document.getElementById("modal-open-link");
 
-  setTimeout(() => {
-    try {
-      downloadEvaluationPlaceholderPDF(label, fileName);
-      showNotification(`${label} PDF Downloaded!`, 'success');
-    } catch (err) {
-      console.error(`${label} download failed:`, err);
-      showNotification('Download failed. Please try again.', 'error');
-    }
-  }, 1200);
-}
+  if (!modal || !frame) return;
 
-function downloadEvaluationPlaceholderPDF(label, fileName) {
-  const content = `%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
-endobj
-4 0 obj
-<< /Length 130 >>
-stream
-BT
-/F1 18 Tf
-50 700 Td
-(Aira E. Villarito - OJT Evaluation Record) Tj
-/F1 12 Tf
-0 -40 Td
-(Document: ${label}) Tj
-0 -20 Td
-(This is a verified placeholder document for the OJT Evaluation.) Tj
-0 -20 Td
-(Clicking the card on the portfolio successfully downloads this file.) Tj
-ET
-endstream
-endobj
-5 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
-endobj
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000062 00000 n 
-0000000120 00000 n 
-0000000250 00000 n 
-0000000418 00000 n 
-trailer
-<< /Size 6 /Root 1 0 R >>
-startxref
-489
-%%EOF`;
+  showNotification(`Opening ${label}...`, 'info');
 
-  const bytes = new Uint8Array(content.length);
-  for (let i = 0; i < content.length; i++) {
-    bytes[i] = content.charCodeAt(i);
+  // THIS SETS THE DIRECTORY PATH TO MATCH YOUR FOLDER STRUCTURE
+  const pdfPath = `/pdf/weekly-report/${fileName}`;
+  const absoluteUrl = window.location.origin + pdfPath;
+
+  // Populate Modal Information
+  if (titleEl) titleEl.textContent = label;
+  if (categoryEl) categoryEl.textContent = "Performance Evaluations";
+  
+  if (openLink) {
+    openLink.href = absoluteUrl; // Links directly to the file for the "Open in New Tab" button
   }
 
-  const blob = new Blob([bytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
+  // Load the PDF into the iframe using Google Docs Viewer
+  frame.src = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(absoluteUrl)}`;
   
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = fileName;
-  
-  document.body.appendChild(link);
-  link.click();
-  
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  modal.classList.add("active");
 }
 
 /**
