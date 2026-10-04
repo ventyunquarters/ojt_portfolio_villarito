@@ -344,6 +344,10 @@ function openDocumentPreview(docName, categoryName = "Before On-the-Job Training
     const cleanName = docName.trim().toLowerCase();
 
       const fileMapping = {
+              "approval sheet": "APPROVAL_LETTER.pdf",
+              "memorandum of agreement": "SYSU_MOA.pdf",
+
+
               "student waiver": "VILLARITO_Student_Waiver.pdf",
               "internship agreement": "Villarito_Internship_Agreement.pdf",
               "consent form": "Villarito_Consent_Form.pdf",
